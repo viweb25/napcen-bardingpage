@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { motion, Variants, AnimatePresence } from "framer-motion";
-import { Droplet, Wind, Grip, Fan, Table, Beaker, RefreshCcw, Share2, Leaf, Shield, Settings, BarChart3, Phone, Mail, MapPin, ChevronRight, Target, Sliders, Layers, Briefcase, Factory, LifeBuoy, Globe, Users, FileText, Send, Cloud, FlaskConical, Pill, Car, PaintRoller, Utensils, Cpu, Scissors, Gem, FileSearch, MonitorCog, Wrench, Headset } from "lucide-react";
+import { Droplet, Wind, Grip, Fan, Table, Beaker, RefreshCcw, Share2, Leaf, Shield, Settings, BarChart3, Phone, Mail, MapPin, ChevronRight, Target, Sliders, Layers, Briefcase, Factory, LifeBuoy, Globe, Users, FileText, Send, Cloud, FlaskConical, Pill, Car, PaintRoller, Utensils, Cpu, Scissors, Gem, FileSearch, MonitorCog, Wrench, Headset, Building2, Anchor, FileBadge, ArrowRight, Plane } from "lucide-react";
 import { Footer } from "@/components/ui/modem-animated-footer";
 import ThreeBackground from "@/components/napcen-landing/ThreeBackground";
 
@@ -28,9 +28,12 @@ const scaleUp: Variants = {
 
 export default function NapcenLandingPage() {
   const [formData, setFormData] = useState({
-    name: "", company: "", email: "", phone: "", industry: "", application: "", equipment: "", desc: ""
+    name: "", company: "", email: "", phone: "", industry: "", application: "", equipment: "", desc: "",
+    country: "", location: "", airflow: "", unit: "", temp: "", timeline: ""
   });
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
+  const [formStep, setFormStep] = useState(1);
+  const [productFilter, setProductFilter] = useState("All equipment");
 
   const handleDemoSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -40,10 +43,35 @@ export default function NapcenLandingPage() {
   return (
     <div className="min-h-screen bg-slate-50 font-sans text-slate-800 selection:bg-napcean-blue selection:text-white">
       {/* TOPBAR */}
-      <div className="hidden md:block bg-[#0f1b3a] text-slate-300 text-xs py-2 border-b border-white/10">
+      <div className="hidden lg:block bg-[#051124] text-slate-300 text-[11.5px] py-2 border-b border-white/5">
         <div className="container mx-auto px-6 flex justify-between items-center max-w-7xl">
-          <span>Industrial Air Pollution Control Equipment & Engineering Solutions</span>
-          <span className="font-medium text-napcean-blue">India | Request a Technical Consultation</span>
+
+          <div className="flex items-center gap-4 divide-x divide-white/10">
+            <div className="flex items-center gap-1.5 text-emerald-500 font-bold tracking-wide">
+              <Globe size={13} /> Global Engineering & Export Hub
+            </div>
+
+            <div className="flex items-center gap-1.5 pl-4 font-medium text-slate-300 tracking-wide">
+              <Plane size={13} className="text-slate-400" /> Exporting to 30+ Countries
+            </div>
+
+            <div className="flex items-center gap-2 pl-4">
+              <span className="bg-blue-500/10 border border-blue-500/20 text-blue-400 font-bold px-2 py-0.5 rounded text-[9px] tracking-widest uppercase">ISO 9001:2015</span>
+              <span className="bg-blue-500/10 border border-blue-500/20 text-blue-400 font-bold px-2 py-0.5 rounded text-[9px] tracking-widest uppercase">CE MARKED</span>
+              <span className="bg-blue-500/10 border border-blue-500/20 text-blue-400 font-bold px-2 py-0.5 rounded text-[9px] tracking-widest uppercase">ATEX / ASME</span>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-4 divide-x divide-white/10">
+            <a href="mailto:info@napcen.com" className="flex items-center gap-1.5 font-medium hover:text-white transition-colors tracking-wide">
+              <Mail size={13} className="text-blue-500" /> info@napcen.com
+            </a>
+
+            <a href="tel:+917904469219" className="flex items-center gap-1.5 pl-4 text-white font-bold hover:text-emerald-400 transition-colors tracking-wide">
+              <Phone size={13} className="text-emerald-500" /> +91 79044 69219
+            </a>
+          </div>
+
         </div>
       </div>
 
@@ -54,21 +82,20 @@ export default function NapcenLandingPage() {
             <Image src="/Napcen-logo.webp" alt="NAPCEN Logo" width={140} height={50} className="object-contain" />
           </a>
 
-          <nav className="hidden md:flex gap-8 text-sm font-bold text-slate-600">
-            {['Solutions', 'Products', 'Applications', 'Industries', 'Projects', 'Contact'].map((item) => (
-              <a key={item} href={`#${item.toLowerCase()}`} className="hover:text-napcean-blue transition-colors">{item}</a>
-            ))}
+          <nav className="hidden md:flex gap-8 text-sm font-bold text-slate-700">
+            <a href="#applications" className="hover:text-primary-blue transition-colors">Applications</a>
+            <a href="#products" className="hover:text-primary-blue transition-colors">Products</a>
+            <a href="#engineering" className="hover:text-primary-blue transition-colors">Engineering</a>
+            <a href="#industries" className="hover:text-primary-blue transition-colors">Industries</a>
+            <a href="#faq" className="hover:text-primary-blue transition-colors">FAQ</a>
+            <a href="#contact" className="hover:text-primary-blue transition-colors">Enquire</a>
           </nav>
-
-          <a href="#contact" className="hidden md:inline-flex bg-primary-blue hover:bg-blue-700 text-white text-sm font-bold py-3 px-6 rounded-full transition-all shadow-napcean-button hover:shadow-button-blue-hover">
-            REQUEST A QUOTE
-          </a>
         </div>
       </header>
 
       <main>
         {/* HERO SECTION */}
-        <section className="relative bg-white overflow-hidden pt-28 pb-12">
+        <section className="relative bg-white overflow-hidden pt-16 pb-12">
           {/* Decorative Background Elements */}
           <div className="absolute top-0 right-0 w-full h-full pointer-events-none z-0">
             <div className="absolute top-20 right-40 w-64 h-64 border border-blue-100 rounded-full opacity-50" />
@@ -80,134 +107,217 @@ export default function NapcenLandingPage() {
             <div className="flex flex-col lg:flex-row gap-8 xl:gap-12 items-center lg:items-stretch min-h-[600px]">
 
               {/* LEFT: TEXT & STATS */}
-              <div className="w-full lg:w-[45%] xl:w-[40%] flex flex-col justify-center pt-10">
+              <div className="w-full lg:w-[45%] xl:w-[45%] flex flex-col justify-center">
                 <div className="mb-6">
                   <span className="text-slate-500 font-bold text-[10px] sm:text-xs tracking-[0.2em] uppercase">
-                    Industrial Air Pollution Control
+                    Custom engineered air pollution control systems · India & export projects
                   </span>
                 </div>
 
-                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-[#0f1b3a] leading-[1.1] tracking-tight mb-6">
-                  Engineered<br />solutions for <br />
-                  <span className="text-primary-blue">cleaner<br />industrial air.</span>
+                <h1 className="text-4xl sm:text-5xl lg:text-[52px] xl:text-[56px] font-black text-[#0f1b3a] leading-[1.1] tracking-tight mb-6">
+                  Industrial air <br />
+                  pollution control <br />
+                  equipment <br />
+                  <span className="text-primary-blue">built for your process.</span>
                 </h1>
 
                 <p className="text-slate-500 text-lg mb-10 max-w-lg leading-relaxed font-medium">
-                  NAPCEN designs and manufactures air pollution control equipment for dust, fumes, gases, vapours and process exhaust applications across industrial environments.
+                  NAPCEN manufactures wet scrubbers, dry scrubbers, dust collectors, fume extractors and source-capture systems for industrial dust, fumes, gases and odour. Share your operating conditions to request a technical quotation.
                 </p>
 
-                <div className="flex flex-wrap items-center gap-4 mb-16">
-                  <a href="#contact" className="bg-primary-blue hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-full transition-all shadow-lg hover:shadow-xl text-sm flex items-center gap-2">
-                    REQUEST A QUOTE <ChevronRight size={16} />
+                <div className="flex flex-wrap items-center gap-4 mb-12">
+                  <a href="#contact" className="bg-primary-blue  text-white font-bold py-4 px-8 rounded-full transition-all shadow-lg hover:shadow-xl text-sm flex items-center gap-2">
+                    Request a technical quote <ArrowRight size={16} className="-rotate-45" />
                   </a>
-                  <a href="#video" className="bg-white border border-slate-200 hover:border-primary-blue text-slate-700 hover:text-primary-blue font-bold py-4 px-8 rounded-full transition-all shadow-sm text-sm flex items-center gap-3">
-                    <div className="w-6 h-6 rounded-full bg-slate-800 text-white flex items-center justify-center pl-0.5">
-                      <div className="w-2 h-2 border-t-[4px] border-t-transparent border-l-[6px] border-l-white border-b-[4px] border-b-transparent" />
-                    </div>
-                    WATCH VIDEO
+                  <a href="#products" className="bg-white border border-slate-200 hover:border-primary-blue text-slate-700 hover:text-primary-blue font-bold py-4 px-8 rounded-full transition-all shadow-sm text-sm flex items-center gap-2">
+                    Explore equipment
                   </a>
                 </div>
 
-                <div className="grid grid-cols-4 gap-4 border-t border-slate-200 pt-8">
-                  <div>
-                    <div className="text-2xl font-black text-[#0f1b3a] mb-1">20+</div>
-                    <div className="text-[10px] sm:text-xs text-slate-500 font-medium">Years Experience</div>
+                <div className="flex flex-col gap-4 border-t border-slate-200 pt-8 sm:flex-row sm:flex-wrap">
+                  <div className="flex items-center gap-3">
+                    <div className="w-5 h-5 rounded-full bg-blue-50 text-primary-blue flex items-center justify-center shrink-0">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    </div>
+                    <span className="text-[13px] text-slate-700 font-bold">Manufacturer-direct enquiry</span>
                   </div>
-                  <div>
-                    <div className="text-2xl font-black text-[#0f1b3a] mb-1">500+</div>
-                    <div className="text-[10px] sm:text-xs text-slate-500 font-medium">Installations</div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-5 h-5 rounded-full bg-blue-50 text-primary-blue flex items-center justify-center shrink-0">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    </div>
+                    <span className="text-[13px] text-slate-700 font-bold">Application-led selection</span>
                   </div>
-                  <div>
-                    <div className="text-2xl font-black text-[#0f1b3a] mb-1">30+</div>
-                    <div className="text-[10px] sm:text-xs text-slate-500 font-medium">Industries Served</div>
-                  </div>
-                  <div>
-                    <div className="text-2xl font-black text-[#0f1b3a] mb-1">100%</div>
-                    <div className="text-[10px] sm:text-xs text-slate-500 font-medium">Committed to Cleaner Air</div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-5 h-5 rounded-full bg-blue-50 text-primary-blue flex items-center justify-center shrink-0">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    </div>
+                    <span className="text-[13px] text-slate-700 font-bold">International project requests</span>
                   </div>
                 </div>
               </div>
 
               {/* CENTER: IMAGE */}
               <div className="w-full lg:w-[25%] xl:w-[30%] relative hidden lg:flex items-center justify-center">
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[160%] max-w-[600px] z-10 pointer-events-none">
+                {/* <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[160%] max-w-[600px] z-10 pointer-events-none">
                   <Image src="https://res.cloudinary.com/defqgygsf/image/upload/v1790179841/0296_rfuykp.png" alt="Industrial Scrubber Equipment" width={600} height={800} className="w-full h-auto object-contain mix-blend-multiply drop-shadow-2xl" />
-                </div>
+                </div> */}
               </div>
 
               {/* RIGHT: FORM */}
-              <div className="w-full lg:w-[30%] relative z-20 flex flex-col justify-center mt-12 lg:mt-0" id="contact">
-                <div className="bg-white rounded-3xl p-8 shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-slate-100">
-                  <div className="flex items-center gap-2 mb-4">
+              <div className="w-full lg:w-[50%] xl:w-[52%] relative z-20 flex flex-col justify-center mt-12 lg:mt-0 lg:-ml-8 xl:-ml-16" id="contact">
+                <div className="bg-white rounded-3xl p-8 sm:p-12 lg:p-14 shadow-[0_20px_60px_rgba(0,0,0,0.08)] border border-slate-100">
+                  <div className="flex items-center gap-2 mb-6">
                     <div className="w-4 h-0.5 bg-primary-blue" />
-                    <span className="text-slate-500 font-bold text-[10px] tracking-[0.2em] uppercase">LET'S WORK TOGETHER</span>
+                    <span className="text-slate-500 font-bold text-xs tracking-[0.2em] uppercase">
+                      {formStep === 1 ? "STEP 1 OF 2 · YOUR APPLICATION" : "STEP 2 OF 2 · CONTACT DETAILS"}
+                    </span>
                   </div>
 
-                  <h3 className="text-2xl font-black text-[#0f1b3a] mb-3">Tell us your requirement</h3>
-                  <p className="text-xs text-slate-500 mb-6 font-medium leading-relaxed">Share your process or pollution-control requirement. Our team can review the application and contact you.</p>
+                  <h3 className="text-3xl lg:text-4xl font-black text-[#0f1b3a] mb-4">Request an engineered quotation</h3>
+                  <p className="text-[15px] text-slate-500 mb-8 font-medium leading-relaxed">Tell us what your process generates. Approximate values are welcome.</p>
 
-                  <form onSubmit={handleDemoSubmit} className="space-y-3">
-                    <div className="grid grid-cols-2 gap-3">
-                      <div className="relative">
-                        <div className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"><Users size={14} /></div>
-                        <input required placeholder="Full Name*" className="w-full bg-white border border-slate-200 rounded-xl pl-9 pr-3 py-2.5 text-xs focus:outline-none focus:border-primary-blue focus:ring-1 focus:ring-primary-blue transition-all" />
+                  {formStep === 1 ? (
+                    <form onSubmit={(e) => { e.preventDefault(); setFormStep(2); }} className="space-y-5">
+                      <div className="grid grid-cols-2 gap-4 xl:gap-5">
+                        <div className="flex flex-col gap-2">
+                          <label className="text-[13px] font-bold text-[#0f1b3a]">Equipment required *</label>
+                          <select required value={formData.equipment} onChange={(e) => setFormData({ ...formData, equipment: e.target.value })} className="w-full bg-white border border-slate-300 rounded-lg px-4 py-3.5 text-sm focus:outline-none focus:border-primary-blue focus:ring-1 focus:ring-primary-blue text-slate-700 transition-all font-medium shadow-sm">
+                            <option value="">Select equipment</option>
+                            <option>Wet Scrubber</option>
+                            <option>Dry Scrubber</option>
+                            <option>Dust Collector</option>
+                            <option>Fume Extractor</option>
+                            <option>Downdraft Table</option>
+                            <option>Fume Hood</option>
+                            <option>Industrial Blower / Ducting</option>
+                            <option>Complete Air Pollution Control System</option>
+                            <option>Not Sure — Recommend</option>
+                          </select>
+                        </div>
+                        <div className="flex flex-col gap-2">
+                          <label className="text-[13px] font-bold text-[#0f1b3a]">Pollutant / application *</label>
+                          <select required value={formData.application} onChange={(e) => setFormData({ ...formData, application: e.target.value })} className="w-full bg-white border border-slate-300 rounded-lg px-4 py-3.5 text-sm focus:outline-none focus:border-primary-blue focus:ring-1 focus:ring-primary-blue text-slate-700 transition-all font-medium shadow-sm">
+                            <option value="">Select pollutant</option>
+                            <option>Acid gas / chemical fumes</option>
+                            <option>Dust / particulate</option>
+                            <option>Welding / solder / laser fumes</option>
+                            <option>H2S / VOC / odour</option>
+                            <option>Oil mist / coolant aerosol</option>
+                            <option>Other process exhaust</option>
+                          </select>
+                        </div>
                       </div>
-                      <div className="relative">
-                        <div className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"><Briefcase size={14} /></div>
-                        <input required placeholder="Company Name*" className="w-full bg-white border border-slate-200 rounded-xl pl-9 pr-3 py-2.5 text-xs focus:outline-none focus:border-primary-blue focus:ring-1 focus:ring-primary-blue transition-all" />
+
+                      <div className="grid grid-cols-2 gap-4 xl:gap-5">
+                        <div className="flex flex-col gap-2">
+                          <label className="text-[13px] font-bold text-[#0f1b3a]">Airflow estimate</label>
+                          <input placeholder="e.g. 5,000" value={formData.airflow} onChange={(e) => setFormData({ ...formData, airflow: e.target.value })} className="w-full bg-white border border-slate-300 rounded-lg px-4 py-3.5 text-sm focus:outline-none focus:border-primary-blue focus:ring-1 focus:ring-primary-blue text-slate-700 transition-all font-medium shadow-sm" />
+                        </div>
+                        <div className="flex flex-col gap-2">
+                          <label className="text-[13px] font-bold text-[#0f1b3a]">Unit</label>
+                          <select value={formData.unit} onChange={(e) => setFormData({ ...formData, unit: e.target.value })} className="w-full bg-white border border-slate-300 rounded-lg px-4 py-3.5 text-sm focus:outline-none focus:border-primary-blue focus:ring-1 focus:ring-primary-blue text-slate-700 transition-all font-medium shadow-sm">
+                            <option value="">CMH (m³/h)</option>
+                            <option>CFM</option>
+                          </select>
+                        </div>
                       </div>
-                    </div>
-                    <div className="grid grid-cols-2 gap-3">
-                      <div className="relative">
-                        <div className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"><Mail size={14} /></div>
-                        <input required type="email" placeholder="Business Email*" className="w-full bg-white border border-slate-200 rounded-xl pl-9 pr-3 py-2.5 text-xs focus:outline-none focus:border-primary-blue focus:ring-1 focus:ring-primary-blue transition-all" />
+
+                      <div className="grid grid-cols-2 gap-4 xl:gap-5">
+                        <div className="flex flex-col gap-2">
+                          <label className="text-[13px] font-bold text-[#0f1b3a]">Operating temperature (°C)</label>
+                          <input placeholder="If known" value={formData.temp} onChange={(e) => setFormData({ ...formData, temp: e.target.value })} className="w-full bg-white border border-slate-300 rounded-lg px-4 py-3.5 text-sm focus:outline-none focus:border-primary-blue focus:ring-1 focus:ring-primary-blue text-slate-700 transition-all font-medium shadow-sm" />
+                        </div>
+                        <div className="flex flex-col gap-2">
+                          <label className="text-[13px] font-bold text-[#0f1b3a]">Project timeline</label>
+                          <select value={formData.timeline} onChange={(e) => setFormData({ ...formData, timeline: e.target.value })} className="w-full bg-white border border-slate-300 rounded-lg px-4 py-3.5 text-sm focus:outline-none focus:border-primary-blue focus:ring-1 focus:ring-primary-blue text-slate-700 transition-all font-medium shadow-sm">
+                            <option value="">Planning stage</option>
+                            <option>Within 1 month</option>
+                            <option>1–3 months</option>
+                            <option>3–6 months</option>
+                            <option>Later</option>
+                          </select>
+                        </div>
                       </div>
-                      <div className="relative">
-                        <div className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"><Phone size={14} /></div>
-                        <input required placeholder="Phone / WhatsApp*" className="w-full bg-white border border-slate-200 rounded-xl pl-9 pr-3 py-2.5 text-xs focus:outline-none focus:border-primary-blue focus:ring-1 focus:ring-primary-blue transition-all" />
+
+                      <div className="flex flex-col gap-2">
+                        <label className="text-[13px] font-bold text-[#0f1b3a]">Process details</label>
+                        <textarea placeholder="Source/process, inlet concentration, target emission, available drawing or site constraints" value={formData.desc} onChange={(e) => setFormData({ ...formData, desc: e.target.value })} className="w-full bg-white border border-slate-300 rounded-lg px-4 py-3.5 text-sm focus:outline-none focus:border-primary-blue focus:ring-1 focus:ring-primary-blue transition-all min-h-[100px] resize-y font-medium text-slate-700 shadow-sm" />
                       </div>
-                    </div>
-                    <div className="grid grid-cols-2 gap-3">
-                      <div className="relative">
-                        <div className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"><Factory size={14} /></div>
-                        <select required className="w-full bg-white border border-slate-200 rounded-xl pl-9 pr-8 py-2.5 text-xs focus:outline-none focus:border-primary-blue text-slate-500 transition-all appearance-none">
-                          <option value="">Industry*</option>
-                          <option>Chemical</option><option>Metal & Engineering</option><option>Other</option>
+
+                      <div className="pt-4">
+                        <button type="submit" className="w-full bg-[#0a5cbb]  text-white font-black py-4 rounded-xl transition-all shadow-md text-sm lg:text-[15px] flex items-center justify-center gap-2 tracking-wide">
+                          CONTINUE TO CONTACT DETAILS <ArrowRight size={18} />
+                        </button>
+                      </div>
+
+                      <p className="text-[11px] text-slate-500 mt-2 font-medium leading-relaxed">
+                        Your details remain on this page until you choose WhatsApp or email. Required fields are marked *.
+                      </p>
+                    </form>
+                  ) : (
+                    <form onSubmit={handleDemoSubmit} className="space-y-5">
+                      <div className="grid grid-cols-2 gap-4 xl:gap-5">
+                        <div className="flex flex-col gap-2">
+                          <label className="text-[13px] font-bold text-[#0f1b3a]">Full name *</label>
+                          <input required value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className="w-full bg-white border border-slate-300 rounded-lg px-4 py-3.5 text-sm focus:outline-none focus:border-primary-blue focus:ring-1 focus:ring-primary-blue text-slate-700 transition-all font-medium shadow-sm" />
+                        </div>
+                        <div className="flex flex-col gap-2">
+                          <label className="text-[13px] font-bold text-[#0f1b3a]">Company name *</label>
+                          <input required value={formData.company} onChange={(e) => setFormData({ ...formData, company: e.target.value })} className="w-full bg-white border border-slate-300 rounded-lg px-4 py-3.5 text-sm focus:outline-none focus:border-primary-blue focus:ring-1 focus:ring-primary-blue text-slate-700 transition-all font-medium shadow-sm" />
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-4 xl:gap-5">
+                        <div className="flex flex-col gap-2">
+                          <label className="text-[13px] font-bold text-[#0f1b3a]">Work email *</label>
+                          <input type="email" required value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} className="w-full bg-white border border-slate-300 rounded-lg px-4 py-3.5 text-sm focus:outline-none focus:border-primary-blue focus:ring-1 focus:ring-primary-blue text-slate-700 transition-all font-medium shadow-sm" />
+                        </div>
+                        <div className="flex flex-col gap-2">
+                          <label className="text-[13px] font-bold text-[#0f1b3a]">Phone / WhatsApp *</label>
+                          <input type="tel" required value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} className="w-full bg-white border border-slate-300 rounded-lg px-4 py-3.5 text-sm focus:outline-none focus:border-primary-blue focus:ring-1 focus:ring-primary-blue text-slate-700 transition-all font-medium shadow-sm" />
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-4 xl:gap-5">
+                        <div className="flex flex-col gap-2">
+                          <label className="text-[13px] font-bold text-[#0f1b3a]">Country *</label>
+                          <input placeholder="e.g. India" required value={formData.country} onChange={(e) => setFormData({ ...formData, country: e.target.value })} className="w-full bg-white border border-slate-300 rounded-lg px-4 py-3.5 text-sm focus:outline-none focus:border-primary-blue focus:ring-1 focus:ring-primary-blue text-slate-700 transition-all font-medium shadow-sm" />
+                        </div>
+                        <div className="flex flex-col gap-2">
+                          <label className="text-[13px] font-bold text-[#0f1b3a]">City / project location *</label>
+                          <input required value={formData.location} onChange={(e) => setFormData({ ...formData, location: e.target.value })} className="w-full bg-white border border-slate-300 rounded-lg px-4 py-3.5 text-sm focus:outline-none focus:border-primary-blue focus:ring-1 focus:ring-primary-blue text-slate-700 transition-all font-medium shadow-sm" />
+                        </div>
+                      </div>
+
+                      <div className="flex flex-col gap-2">
+                        <label className="text-[13px] font-bold text-[#0f1b3a]">Industry</label>
+                        <select value={formData.industry} onChange={(e) => setFormData({ ...formData, industry: e.target.value })} className="w-full bg-white border border-slate-300 rounded-lg px-4 py-3.5 text-sm focus:outline-none focus:border-primary-blue focus:ring-1 focus:ring-primary-blue text-slate-700 transition-all font-medium shadow-sm">
+                          <option>Chemical & petrochemical</option>
+                          <option>Pharmaceutical</option>
+                          <option>Metal & engineering</option>
+                          <option>Automotive</option>
+                          <option>Electronics</option>
+                          <option>Food processing</option>
+                          <option>Textile</option>
+                          <option>Water / wastewater</option>
+                          <option>Other manufacturing</option>
                         </select>
                       </div>
-                      <div className="relative">
-                        <div className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"><Layers size={14} /></div>
-                        <select className="w-full bg-white border border-slate-200 rounded-xl pl-9 pr-8 py-2.5 text-xs focus:outline-none focus:border-primary-blue text-slate-500 transition-all appearance-none">
-                          <option value="">Application</option>
-                          <option>Dust</option><option>Fumes</option><option>Other</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div className="relative">
-                      <div className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"><Settings size={14} /></div>
-                      <select className="w-full bg-white border border-slate-200 rounded-xl pl-9 pr-8 py-2.5 text-xs focus:outline-none focus:border-primary-blue text-slate-500 transition-all appearance-none">
-                        <option value="">Equipment Required</option>
-                        <option>Wet Scrubber</option>
-                        <option>Dry Scrubber</option>
-                        <option>Dust Collector</option>
-                        <option>Fume Extractor</option>
-                        <option>Downdraft Table</option>
-                        <option>Fume Hood</option>
-                        <option>Industrial Blower</option>
-                        <option>Ventilation / Ducting</option>
-                        <option>Complete APC System</option>
-                        <option>Not Sure</option>
-                      </select>
-                    </div>
-                    <div className="relative">
-                      <div className="absolute left-3 top-3 text-slate-400"><FileText size={14} /></div>
-                      <textarea placeholder="Briefly describe your process, pollutant or requirement" className="w-full bg-white border border-slate-200 rounded-xl pl-9 pr-3 py-3 text-xs focus:outline-none focus:border-primary-blue focus:ring-1 focus:ring-primary-blue transition-all min-h-[80px] resize-none" />
-                    </div>
 
-                    <button type="submit" className="w-full bg-[#0a5cbb] hover:bg-primary-blue text-white font-bold py-3.5 rounded-xl transition-all shadow-md mt-2 text-xs flex items-center justify-center gap-2">
-                      <Send size={14} /> GET MY QUOTATION
-                    </button>
-                  </form>
+                      <div className="flex justify-between gap-3 pt-4">
+                        <button type="button" onClick={(e) => { e.preventDefault(); setFormStep(1); }} className="px-6 sm:px-8 bg-white border border-slate-200 hover:border-slate-300 hover:bg-slate-50 text-[#0f1b3a] font-black py-4 rounded-xl transition-all shadow-sm text-sm flex items-center justify-center shrink-0">
+                          ← Back
+                        </button>
+                        <button type="submit" className="px-8 sm:px-12 bg-[#0a5cbb] text-white font-black py-4 rounded-xl transition-all shadow-md text-sm lg:text-[15px] flex items-center justify-center gap-2 tracking-wide shrink-0">
+                          SUBMIT ENQUIRY <ArrowRight size={18} />
+                        </button>
+                      </div>
+
+                      <p className="text-[11px] text-slate-500 mt-2 font-medium leading-relaxed">
+                        Required fields are marked *.
+                      </p>
+                    </form>
+                  )}
 
                   <div className="flex justify-between items-center mt-6 pt-4 border-t border-slate-100 text-[10px] text-slate-500 font-medium">
                     <div className="flex items-center gap-1.5"><Shield size={12} className="text-[#0f1b3a]" /> Quick Response</div>
@@ -251,38 +361,32 @@ export default function NapcenLandingPage() {
           <div className="w-full px-6 md:px-12 2xl:px-24">
 
             {/* Header Area */}
-            <div className="grid md:grid-cols-[1.2fr_1fr] gap-8 md:gap-12 items-center mb-16 relative">
-              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="max-w-3xl">
+            <div className="mb-16 relative">
+              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="max-w-5xl">
                 <div className="mb-4">
-                  <span className="text-slate-500 font-bold text-xs tracking-[0.2em] uppercase">START WITH THE PROBLEM</span>
+                  <span className="text-slate-500 font-bold text-[11px] tracking-[0.2em] uppercase block">START WITH THE PROBLEM</span>
                 </div>
-                <h2 className="text-5xl md:text-[4rem] font-black text-slate-800 leading-[1.05] mb-6 tracking-tight">
-                  What are you trying <br />
-                  <span className="text-primary-blue">to control?</span>
+                <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-[#0f1b3a] leading-[1.05] tracking-tight mb-6">
+                  What air pollutant do you<br />
+                  <span className="text-primary-blue">need to control?</span>
                 </h2>
                 <div className="flex flex-col md:flex-row gap-8 items-start md:items-center">
-                  <p className="text-slate-500 text-lg max-w-md leading-relaxed">
-                    Industrial buyers often search by the pollution problem first. Guide visitors from their process requirement to the appropriate solution.
+                  <p className="text-slate-500 text-lg mb-10 max-w-lg leading-relaxed font-medium">
+                    Equipment selection depends on contaminant properties, exhaust volume, temperature, moisture and the permitted outlet condition. Choose the application closest to your process.
                   </p>
-                  <div className="flex flex-col gap-2 md:border-l-2 border-slate-200 md:pl-6">
-                    <a href="#contact" className="bg-primary-blue text-white px-8 py-3 rounded-full font-bold text-sm hover:bg-blue-600 transition-colors inline-flex items-center justify-center gap-2 whitespace-nowrap">
-                      Explore All Solutions →
-                    </a>
-                    <span className="text-xs text-slate-400 font-bold tracking-wide mt-1">Cleaner Processes.<br />A Safer Tomorrow.</span>
-                  </div>
                 </div>
               </motion.div>
             </div>
 
             {/* Problem Cards Grid */}
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 xl:gap-8">
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} className="grid md:grid-cols-2 gap-6 xl:gap-8">
               {[
-                { title: "Dust & Particulate", desc: "Industrial dust collection for manufacturing, grinding, material handling and process operations.", icon: Grip, bgImage: "https://res.cloudinary.com/defqgygsf/image/upload/v1790177034/banner01_oz1rwt.png" },
-                { title: "Industrial Fumes", desc: "Source-capture and extraction systems for welding, fabrication, heating and manufacturing processes.", icon: Wind, bgImage: "https://res.cloudinary.com/defqgygsf/image/upload/v1790177034/banner2_lu8yh2.png" },
-                { title: "Gases & Vapours", desc: "Scrubbing and exhaust-treatment solutions selected according to pollutant and process conditions.", icon: Share2, bgImage: "https://res.cloudinary.com/defqgygsf/image/upload/v1790177033/banner3_kwzfrf.png" },
-                { title: "Oil Mist", desc: "Extraction and collection solutions for machining and metalworking environments.", icon: Droplet, bgImage: "https://res.cloudinary.com/defqgygsf/image/upload/v1790177032/banner4_fqpxae.png" },
-                { title: "Process Exhaust", desc: "Industrial extraction, ventilation and treatment systems for process-generated exhaust.", icon: Fan, bgImage: "https://res.cloudinary.com/defqgygsf/image/upload/v1790177034/banner5_jf92ee.png" },
-                { title: "Odour & Vapour", desc: "Application-specific control solutions based on the characteristics of the exhaust stream.", icon: Leaf, bgImage: "https://res.cloudinary.com/defqgygsf/image/upload/v1790177177/banner6_powngt.png" }
+                { title: "Dust & particulate", desc: "Grinding, powder transfer, cement, minerals, woodworking and material handling may need cyclone pre-separation, cartridge filtration, pulse-jet baghouses or wet collection.", icon: Grip, bgImage: "https://res.cloudinary.com/defqgygsf/image/upload/v1790177034/banner01_oz1rwt.png", linkText: "Explore dust collectors →", linkUrl: "https://napcen-apc-rfq.napcenpondy.chatgpt.site/#products" },
+                { title: "Acid gases & chemical fumes", desc: "HCl, NH₃, SO₂ and other soluble or reactive streams call for a pollutant-specific wet scrubber with suitable reagent, contact time, materials and mist elimination.", icon: Share2, bgImage: "https://res.cloudinary.com/defqgygsf/image/upload/v1790177033/banner3_kwzfrf.png", linkText: "Explore wet scrubbers →", linkUrl: "https://napcen-apc-rfq.napcenpondy.chatgpt.site/#products" },
+                { title: "Welding, solder & laser fumes", desc: "Capture at source using extraction arms, hoods, downdraft tables and a filter system sized to the task, workstations and duct losses.", icon: Wind, bgImage: "https://res.cloudinary.com/defqgygsf/image/upload/v1790177034/banner2_lu8yh2.png", linkText: "Explore fume extraction →", linkUrl: "https://napcen-apc-rfq.napcenpondy.chatgpt.site/#products" },
+                { title: "H₂S, VOCs & odour", desc: "Dry media systems and tailored process exhaust treatment may suit wastewater, biogas, chemicals and odorous handling operations after gas characterization.", icon: Leaf, bgImage: "https://res.cloudinary.com/defqgygsf/image/upload/v1790177177/banner6_powngt.png", linkText: "Discuss gas composition →", linkUrl: "https://napcen-apc-rfq.napcenpondy.chatgpt.site/#contact" },
+                { title: "Oil mist & machining aerosol", desc: "Assess coolant type, mist loading, enclosure air changes and maintenance access for CNC machining and industrial mist collection.", icon: Droplet, bgImage: "https://res.cloudinary.com/defqgygsf/image/upload/v1790177032/banner4_fqpxae.png", linkText: "Discuss mist control →", linkUrl: "https://napcen-apc-rfq.napcenpondy.chatgpt.site/#contact" },
+                { title: "Integrated process exhaust", desc: "Capture, ducting, fan, treatment and discharge should be engineered as one system to meet the required airflow and pressure balance.", icon: Fan, bgImage: "https://res.cloudinary.com/defqgygsf/image/upload/v1790177034/banner5_jf92ee.png", linkText: "Request system review →", linkUrl: "https://napcen-apc-rfq.napcenpondy.chatgpt.site/#contact" }
               ].map((item, i) => {
                 const Icon = item.icon;
                 return (
@@ -310,8 +414,8 @@ export default function NapcenLandingPage() {
                       <p className="text-slate-500 text-sm font-medium leading-relaxed mb-6">{item.desc}</p>
 
                       <div className="mt-auto">
-                        <a href="#contact" className="inline-flex items-center gap-2 text-xs font-bold text-primary-blue hover:text-blue-700 transition-colors group-hover:translate-x-1 duration-300">
-                          Explore solutions →
+                        <a href={item.linkUrl} className="inline-flex items-center gap-2 text-xs font-bold text-primary-blue hover:text-blue-700 transition-colors group-hover:translate-x-1 duration-300">
+                          {item.linkText}
                         </a>
                       </div>
                     </div>
@@ -347,18 +451,87 @@ export default function NapcenLandingPage() {
           </div>
         </section>
 
+        {/* ENGINEERING SECTION */}
+        <section id="engineering" className="py-24 bg-white relative overflow-hidden border-t border-slate-100">
+          <div className="container mx-auto px-6 max-w-7xl relative z-10">
+            <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-start">
+
+              {/* Left Column */}
+              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="w-full lg:w-1/2">
+                <span className="text-primary-blue font-bold text-[11px] tracking-[0.2em] uppercase block mb-4">
+                  TECHNICAL ENQUIRY CHECKLIST
+                </span>
+                <h2 className="text-4xl md:text-5xl font-black text-[#0f1b3a] leading-[1.1] tracking-tight mb-6">
+                  Help our engineers size the right system.
+                </h2>
+                <p className="text-slate-500 text-[15px] mb-8 leading-relaxed font-medium">
+                  The best quotation defines both the pollutant and the duty. If your figures are estimates, state the basis and we can review the missing values.
+                </p>
+                <ul className="space-y-4 mb-10 text-[14px] text-slate-600 font-medium">
+                  {[
+                    "Required exhaust flow in CFM or CMH, plus number of pickup points",
+                    "Pollutant species, inlet loading and target outlet or applicable permit condition",
+                    "Temperature, humidity, pressure, operating hours and process variation",
+                    "Preferred metallurgy, layout, duct route and available utilities",
+                    "Installation country, timeline and scope of supply"
+                  ].map((item, i) => (
+                    <li key={i} className="flex gap-3 items-start">
+                      <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#0f1b3a] shrink-0" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+                <a href="#contact" className="inline-flex items-center gap-2 bg-primary-blue text-white font-bold py-3.5 px-8 rounded-xl transition-all shadow-md text-sm">
+                  Start technical RFQ →
+                </a>
+              </motion.div>
+
+              {/* Right Column */}
+              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="w-full lg:w-1/2">
+                <div className="bg-slate-50/70 rounded-3xl p-8 md:p-10 border border-slate-200/60">
+                  <span className="text-primary-blue font-bold text-[11px] tracking-[0.2em] uppercase block mb-4">
+                    EQUIPMENT SELECTION EXAMPLE
+                  </span>
+                  <h3 className="text-xl md:text-2xl font-bold text-[#0f1b3a] leading-tight mb-4">
+                    Acid fume extraction to packed bed scrubbing
+                  </h3>
+                  <p className="text-slate-500 text-sm leading-relaxed font-medium mb-4">
+                    Capture points feed a corrosion-compatible duct and fan. A packed bed scrubber brings the gas into contact with recirculated liquid; the chosen reagent can neutralize a target pollutant. A mist eliminator limits liquid carryover before discharge.
+                  </p>
+                  <p className="text-slate-500 text-sm leading-relaxed font-medium mb-8">
+                    <strong className="text-[#0f1b3a]">What changes the design:</strong> gas solubility and concentration, liquid chemistry, temperature, required outlet, fan pressure and material compatibility.
+                  </p>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    {[
+                      { num: "01", label: "Capture & convey" },
+                      { num: "02", label: "Treat the exhaust" },
+                      { num: "03", label: "Verify the outlet" }
+                    ].map((step, i) => (
+                      <div key={i} className="bg-white rounded-2xl p-5 shadow-sm border border-slate-100 flex flex-col gap-3">
+                        <span className="text-[#0f1b3a] font-black text-lg">{step.num}</span>
+                        <span className="text-slate-500 text-xs font-medium leading-tight">{step.label}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
         {/* APPLICATIONS SECTION */}
         <section id="applications" className="py-24 bg-white relative overflow-hidden">
           <div className="container mx-auto px-6 max-w-7xl relative z-10">
 
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="mb-12">
-              <span className="text-slate-500 font-bold text-xs tracking-[0.2em] uppercase mb-4 block">
+              <span className="text-slate-500 font-bold text-[11px] tracking-[0.2em] uppercase block mb-4">
                 APPLICATIONS
               </span>
-              <h2 className="text-5xl md:text-[4rem] font-black text-slate-800 leading-[1.05] mb-6 tracking-tight">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-[#0f1b3a] leading-[1.05] tracking-tight mb-6">
                 Solutions by industrial application
               </h2>
-              <p className="text-slate-500 text-lg">
+              <p className="text-slate-500 text-lg mb-10 max-w-lg leading-relaxed font-medium">
                 Build search visibility around real customer problems and process requirements.
               </p>
             </motion.div>
@@ -386,18 +559,32 @@ export default function NapcenLandingPage() {
         <section id="products" className="py-24 bg-white relative overflow-hidden">
           <div className="w-full px-4 md:px-8 xl:px-12 2xl:px-16">
             {/* Header Area */}
-            <div className="grid md:grid-cols-[1.5fr_1fr] gap-8 md:gap-12 items-center mb-16 relative">
-              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="max-w-3xl">
+            <div className="grid md:grid-cols-[2fr_1fr] gap-8 md:gap-12 items-center mb-16 relative">
+              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="max-w-4xl">
                 <div className="mb-4">
-                  <span className="text-slate-500 font-bold text-xs tracking-[0.2em] uppercase">Equipment</span>
+                  <span className="text-slate-500 font-bold text-[11px] tracking-[0.2em] uppercase block">Equipment</span>
                 </div>
-                <h2 className="text-5xl md:text-[4rem] font-black text-slate-800 leading-[1.05] mb-6 tracking-tight">
-                  Air Pollution Control <br />
-                  <span className="text-primary-blue">Equipment</span>
+                <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-[#0f1b3a] leading-[1.05] tracking-tight mb-6">
+                  Air pollution control equipment <br className="hidden md:block" />
+                  manufacturer for <span className="text-primary-blue">industrial plants</span>
                 </h2>
-                <p className="text-slate-500 text-lg md:text-xl max-w-2xl leading-relaxed">
-                  A focused product range for industrial dust, fume, gas and process-exhaust control applications.
+                <p className="text-slate-500 text-lg mb-10 max-w-lg leading-relaxed font-medium">
+                  Compare the primary treatment methods, then send the equipment name into your RFQ with one click. Final design and compliance targets are confirmed against your data.
                 </p>
+                <div className="flex flex-wrap gap-2 md:gap-3 items-center">
+                  {["All equipment", "Scrubbers", "Dust collection", "Fume & source capture", "System components"].map(filter => (
+                    <button
+                      key={filter}
+                      onClick={() => setProductFilter(filter)}
+                      className={`px-4 py-2 rounded-full text-[13px] font-bold transition-all border
+                        ${productFilter === filter
+                          ? 'bg-[#0f1b3a] text-white border-[#0f1b3a]'
+                          : 'bg-white text-slate-600 border-slate-200 hover:border-slate-400 hover:text-slate-800'}`}
+                    >
+                      {filter}
+                    </button>
+                  ))}
+                </div>
               </motion.div>
 
               <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="flex justify-center md:justify-end items-center gap-4 md:gap-8 mt-8 md:mt-0">
@@ -425,47 +612,151 @@ export default function NapcenLandingPage() {
             {/* Product Cards Grid */}
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 xl:gap-5">
               {[
-                { title: "Wet Scrubbers", desc: "Wet scrubbing systems for selected particulate, fume and gaseous pollutant-control applications.", icon: Droplet, image: "https://res.cloudinary.com/defqgygsf/image/upload/v1790175868/napcen1-removebg-preview_vwj9wi.png" },
-                { title: "Dry Scrubbers", desc: "Dry treatment systems for suitable industrial gas and particulate applications.", icon: Wind, image: "https://res.cloudinary.com/defqgygsf/image/upload/v1790175866/napcen2-removebg-preview_x2nmtd.png" },
-                { title: "Dust Collectors", desc: "Industrial dust collection systems for process-generated particulate matter.", icon: Grip, image: "https://res.cloudinary.com/defqgygsf/image/upload/v1790175866/napcen3-removebg-preview_pektvs.png" },
-                { title: "Fume Extractors", desc: "Source-capture extraction for welding, fabrication, soldering and industrial processes.", icon: Fan, image: "https://res.cloudinary.com/defqgygsf/image/upload/v1790175866/napcen4-removebg-preview_kgiu8h.png" },
-                { title: "Downdraft Tables", desc: "Workstation extraction for grinding, sanding and other dust- or fume-generating operations.", icon: Table, image: "https://res.cloudinary.com/defqgygsf/image/upload/v1790175866/napcen5-removebg-preview_af4c6d.png" },
-                { title: "Fume Hoods", desc: "Extraction enclosures designed to capture process-generated contaminants at source.", icon: Beaker, image: "https://res.cloudinary.com/defqgygsf/image/upload/v1790175866/napcen6-removebg-preview_sosenw.png" },
-                { title: "Industrial Blowers", desc: "Air-moving equipment selected for required airflow and pressure in extraction systems.", icon: Fan, image: "https://res.cloudinary.com/defqgygsf/image/upload/v1790175867/napcen7-removebg-preview_tqczhg.png" },
-                { title: "Ventilation & Ducting", desc: "Industrial ducting and ventilation solutions for effective air movement and pollutant extraction.", icon: RefreshCcw, image: "https://res.cloudinary.com/defqgygsf/image/upload/v1790175868/napcen8-removebg-preview_fvhqxs.png" }
-              ].map((item, i) => {
-                const Icon = item.icon;
-                const isHighlight = false;
-                return (
-                  <motion.div key={i} variants={fadeInUp} className="relative p-6 lg:p-7 rounded-3xl bg-white border border-slate-200 shadow-sm hover:shadow-xl transition-all group overflow-hidden min-h-[420px] flex flex-col">
-                    {/* Top row: Number and Icon */}
-                    <div className="flex justify-between items-start mb-6 relative z-10">
-                      <div className="text-8xl md:text-9xl font-black text-slate-200 group-hover:text-primary-blue/20 transition-colors tracking-tighter">0{i + 1}</div>
-                      <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${isHighlight ? 'bg-primary-blue/10 text-primary-blue' : 'bg-slate-50 text-slate-400'} group-hover:bg-primary-blue group-hover:text-white transition-colors`}>
-                        <Icon size={24} />
+                {
+                  category: "GAS & FUME TREATMENT",
+                  title: "Industrial wet scrubbers for acid gas and fumes",
+                  desc: "Packed bed, spray tower, venturi and emergency chlorine scrubber configurations. Evaluate absorption, neutralization, packing, recirculation and mist elimination for the target gas or particulate.",
+                  extraLabel: "Typical materials",
+                  extraText: "PP, FRP, SS and lined construction, subject to chemistry and temperature.",
+                  btnText: "Enquire about scrubbers →",
+                  icon: Droplet,
+                  image: "https://res.cloudinary.com/defqgygsf/image/upload/v1790175868/napcen1-removebg-preview_vwj9wi.png",
+                  equipmentSelect: "Wet Scrubber",
+                  filterTag: "Scrubbers"
+                },
+                {
+                  category: "ODOUR & GAS ADSORPTION",
+                  title: "Industrial dry scrubbers",
+                  desc: "Media-based treatment for suitable H₂S, VOC and odour applications in wastewater, biogas and industrial processes. Bed life depends on concentration, humidity and duty.",
+                  extraLabel: "Design inputs",
+                  extraText: "Gas species, ppm load, flow and media changeout approach.",
+                  btnText: "Enquire about dry systems →",
+                  icon: Wind,
+                  image: "https://res.cloudinary.com/defqgygsf/image/upload/v1790691907/5_epgwrw.png",
+                  equipmentSelect: "Dry Scrubber",
+                  filterTag: "Scrubbers"
+                },
+                {
+                  category: "PROCESS DUST",
+                  title: "Pulse-jet baghouse dust collector systems",
+                  desc: "Continuous extraction with filter bags and pulse cleaning for process dust in cement, metal, chemical and bulk handling operations.",
+                  extraLabel: "Design inputs",
+                  extraText: "Dust loading, particle size, moisture, temperature and dust safety review.",
+                  btnText: "Enquire about baghouses →",
+                  icon: Grip,
+                  image: "https://res.cloudinary.com/defqgygsf/image/upload/v1790691907/4_wigjre.png",
+                  equipmentSelect: "Dust Collector",
+                  filterTag: "Dust collection"
+                },
+                {
+                  category: "COMPACT FILTRATION",
+                  title: "Cartridge & cyclone dust collectors",
+                  desc: "Cartridge systems for suitable fine dry dust; cyclones for coarse pre-separation or as part of a multi-stage dust control system.",
+                  extraLabel: "Design inputs",
+                  extraText: "Particle properties, airflow, pressure drop and cleaning method.",
+                  btnText: "Enquire about dust control →",
+                  icon: Fan,
+                  image: "https://res.cloudinary.com/defqgygsf/image/upload/v1790691907/3_ohg7nm.png",
+                  equipmentSelect: "Dust Collector",
+                  filterTag: "Dust collection"
+                },
+                {
+                  category: "CAPTURE AT SOURCE",
+                  title: "Industrial welding, laser and solder fume extractors",
+                  desc: "Welding, laser and solder fume extraction with local hoods or arms, ducting and staged filters chosen for the emission source.",
+                  extraLabel: "Design inputs",
+                  extraText: "Station count, capture distance, process and operating hours.",
+                  btnText: "Enquire about fume systems →",
+                  icon: Table,
+                  image: "https://res.cloudinary.com/defqgygsf/image/upload/v1790691907/2_ghh1qy.png",
+                  equipmentSelect: "Fume Extractor",
+                  filterTag: "Fume & source capture"
+                },
+                {
+                  category: "WORKSTATION CONTROL",
+                  title: "Industrial downdraft tables",
+                  desc: "Downward source capture for grinding, polishing, welding and deburring where table geometry and spark or combustible dust hazards need review.",
+                  extraLabel: "Design inputs",
+                  extraText: "Workpiece size, task, dust type and operator arrangement.",
+                  btnText: "Enquire about tables →",
+                  icon: Beaker,
+                  image: "https://res.cloudinary.com/defqgygsf/image/upload/v1790691907/1_vbu2zw.png",
+                  equipmentSelect: "Downdraft Table",
+                  filterTag: "Fume & source capture"
+                },
+                {
+                  category: "ENCLOSED EXTRACTION",
+                  title: "Fume hoods & CNC mist control",
+                  desc: "Industrial capture enclosures and mist filtration concepts for chemical work, machining and aerosol-generating processes.",
+                  extraLabel: "Design inputs",
+                  extraText: "Opening dimensions, source rate, fluid type and duct routing.",
+                  btnText: "Enquire about enclosures →",
+                  icon: Fan,
+                  image: "https://res.cloudinary.com/defqgygsf/image/upload/v1790175867/napcen7-removebg-preview_tqczhg.png",
+                  equipmentSelect: "Fume Hood",
+                  filterTag: "Fume & source capture"
+                },
+                {
+                  category: "COMPLETE APC SYSTEM",
+                  title: "Blowers, ducting & ventilation",
+                  desc: "Fans, corrosion-resistant ducting and capture networks engineered with the treatment device to deliver the required volume at the source.",
+                  extraLabel: "Design inputs",
+                  extraText: "Route length, fittings, static pressure and installation scope.",
+                  btnText: "Enquire about full systems →",
+                  icon: RefreshCcw,
+                  image: "https://res.cloudinary.com/defqgygsf/image/upload/v1790175868/napcen8-removebg-preview_fvhqxs.png",
+                  equipmentSelect: "Complete Air Pollution Control System",
+                  filterTag: "System components"
+                }
+              ]
+                .filter(item => productFilter === "All equipment" || item.filterTag === productFilter)
+                .map((item, i) => {
+                  const Icon = item.icon;
+                  const isHighlight = false;
+                  return (
+                    <motion.div key={i} variants={fadeInUp} className="relative p-6 lg:p-7 rounded-3xl bg-white border border-slate-200 shadow-sm hover:shadow-xl transition-all group overflow-hidden min-h-[420px] flex flex-col">
+                      {/* Top row: Number and Icon */}
+                      <div className="flex justify-between items-start mb-6 relative z-10">
+                        <div className="text-8xl md:text-9xl font-black text-slate-200 group-hover:text-primary-blue/20 transition-colors tracking-tighter">0{i + 1}</div>
+                        <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${isHighlight ? 'bg-primary-blue/10 text-primary-blue' : 'bg-slate-50 text-slate-400'} group-hover:bg-primary-blue group-hover:text-white transition-colors`}>
+                          <Icon size={24} />
+                        </div>
                       </div>
-                    </div>
 
-                    {/* Content */}
-                    <div className="relative z-20 flex-1 flex flex-col">
-                      <h3 className="text-2xl font-black mb-3 text-slate-800">{item.title}</h3>
-                      <p className="text-slate-600 text-base font-medium leading-relaxed mb-12 pr-4 lg:pr-12">{item.desc}</p>
+                      {/* Content */}
+                      <div className="relative z-20 flex-1 flex flex-col">
+                        <div className="text-[10px] font-bold text-primary-blue tracking-widest uppercase mb-2">
+                          {item.category}
+                        </div>
+                        <h3 className="text-2xl font-black mb-3 text-slate-800">{item.title}</h3>
+                        <p className="text-slate-600 text-sm font-medium leading-relaxed mb-4 pr-4 lg:pr-12">{item.desc}</p>
 
-                      <div className="mt-auto">
-                        <a href="#contact" className={`inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-xs font-bold tracking-wider transition-all
+                        <div className="mb-8 pr-4 lg:pr-12">
+                          <span className="font-bold text-xs text-slate-700 uppercase">{item.extraLabel}:</span>
+                          <span className="text-sm text-slate-500 ml-2">{item.extraText}</span>
+                        </div>
+
+                        <div className="mt-auto flex justify-start relative z-30">
+                          <button
+                            onClick={(e) => {
+                              e.preventDefault();
+                              setFormData({ ...formData, equipment: item.equipmentSelect || "" });
+                              document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+                            }}
+                            className={`inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-[10px] font-bold tracking-wider transition-all
                           ${isHighlight ? 'bg-primary-blue text-white shadow-lg shadow-blue-500/30 hover:bg-blue-600' : 'border border-slate-200 text-slate-700 hover:border-primary-blue hover:text-primary-blue bg-white/80 backdrop-blur-sm'}`}>
-                          ENQUIRE →
-                        </a>
+                            {item.btnText}
+                          </button>
+                        </div>
                       </div>
-                    </div>
 
-                    {/* Background Equipment Image - Absolute at bottom right */}
-                    <div className="absolute -bottom-2 -right-6 lg:-right-8 w-[180px] h-[180px] lg:w-[200px] lg:h-[200px] z-10 group-hover:scale-110 transition-transform duration-500 origin-bottom-right">
-                      <Image src={item.image} alt={item.title} fill className="object-contain drop-shadow-2xl" />
-                    </div>
-                  </motion.div>
-                );
-              })}
+                      {/* Background Equipment Image - Absolute at bottom right */}
+                      <div className="absolute -bottom-2 -right-6 lg:-right-8 w-[180px] h-[180px] lg:w-[200px] lg:h-[200px] z-10 group-hover:scale-110 transition-transform duration-500 origin-bottom-right">
+                        <Image src={item.image} alt={item.title} fill className="object-contain drop-shadow-2xl" />
+                      </div>
+                    </motion.div>
+                  );
+                })}
             </motion.div>
 
             {/* Bottom Footer for Products Section */}
@@ -487,269 +778,265 @@ export default function NapcenLandingPage() {
         {/* INDUSTRIES SECTION */}
         <section id="industries" className="py-24 bg-white relative overflow-hidden">
           <div className="container mx-auto px-6 max-w-7xl relative z-10">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="mb-12">
-              <span className="text-slate-500 font-bold text-xs tracking-[0.2em] uppercase mb-4 block">
-                INDUSTRIES
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="mb-14 max-w-4xl">
+              <span className="text-slate-500 font-bold text-[11px] tracking-[0.2em] uppercase block mb-4">
+                INDUSTRIAL APPLICATIONS
               </span>
-              <h2 className="text-4xl md:text-5xl font-black text-[#0f1b3a] leading-tight mb-4">
-                Industries we serve
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-[#0f1b3a] leading-[1.05] tracking-tight mb-6">
+                Air pollution control systems for
+                different industries
               </h2>
-              <p className="text-slate-500 text-lg">
-                Present NAPCEN as an application-focused engineering partner across industrial sectors.
+              <p className="text-slate-500 text-lg mb-10 max-w-lg leading-relaxed font-medium">
+                NAPCEN can review applications in chemical processing, pharmaceuticals, metalworking, automotive, electronics, food processing, textile operations and water treatment. The pollutant determines the control approach.
               </p>
             </motion.div>
 
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4">
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
-                { title: "Chemical", subtitle: "Fumes • gases • process exhaust", icon: FlaskConical },
-                { title: "Pharmaceutical", subtitle: "Dust • process extraction", icon: Pill },
-                { title: "Metal & Engineering", subtitle: "Dust • fumes • machining", icon: Settings },
-                { title: "Automotive", subtitle: "Welding • machining", icon: Car },
-                { title: "Paint & Coatings", subtitle: "Fumes • exhaust", icon: PaintRoller },
-                { title: "Food Processing", subtitle: "Dust • exhaust • odour", icon: Utensils },
-                { title: "Electronics", subtitle: "Fume • process extraction", icon: Cpu },
-                { title: "Textile", subtitle: "Dust • fibre extraction", icon: Scissors },
-                { title: "Mining & Minerals", subtitle: "Particulate • dust", icon: Gem },
-                { title: "General Manufacturing", subtitle: "Customized APC systems", icon: Factory }
-              ].map((ind, i) => {
-                const Icon = ind.icon;
-                return (
-                  <motion.div key={i} variants={fadeInUp} className="bg-white rounded-xl p-6 border border-slate-200 hover:border-primary-blue hover:shadow-md transition-all group flex flex-col justify-center cursor-default">
-                    <div className="text-slate-400 group-hover:text-primary-blue transition-colors mb-4">
-                      <Icon size={24} strokeWidth={1.5} />
-                    </div>
-                    <h3 className="text-[15px] font-bold text-[#0f1b3a] mb-1.5">{ind.title}</h3>
-                    <p className="text-[11px] text-slate-500 uppercase tracking-wide font-medium">{ind.subtitle}</p>
-                  </motion.div>
-                );
-              })}
+                { title: "Chemical & pharmaceutical", desc: "Acid fume scrubbers, reactor vent treatment, powder dust collectors and corrosion-resistant process exhaust systems." },
+                { title: "Metal fabrication & automotive", desc: "Welding fume extraction, grinding downdraft tables, CNC oil mist collection and general process ventilation." },
+                { title: "Water, wastewater & biogas", desc: "H₂S treatment, STP odour control and suitable dry or wet scrubbing after composition and safety review." },
+                { title: "Food & bulk materials", desc: "Dust capture at transfer and handling points, with material, hygiene and combustible dust considerations." },
+                { title: "Electronics manufacturing", desc: "Local solder fume capture and centralized extraction concepts for multi-station production areas." },
+                { title: "Boiler & thermal processes", desc: "Flue-gas treatment concepts based on particulate, acid gas, temperature and emission constraints." }
+              ].map((ind, i) => (
+                <motion.div key={i} variants={fadeInUp} className="bg-white rounded-2xl p-8 border border-slate-200 hover:border-slate-300 hover:shadow-md transition-all group">
+                  <h3 className="text-lg font-bold text-[#0f1b3a] mb-3">{ind.title}</h3>
+                  <p className="text-sm text-slate-500 leading-relaxed font-medium">{ind.desc}</p>
+                </motion.div>
+              ))}
             </motion.div>
-          </div>
-        </section>
 
-        {/* PROCESS SECTION */}
-        <section className="py-24 bg-white relative overflow-hidden">
-          {/* Blueprint Background Grid */}
-          <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'linear-gradient(#0066FF 1px, transparent 1px), linear-gradient(90deg, #0066FF 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
-
-          {/* Faint industrial background elements (simulated) */}
-          <div className="absolute right-0 top-0 bottom-0 w-1/3 bg-gradient-to-l from-blue-50 to-transparent z-0"></div>
-
-          <div className="container mx-auto px-6 max-w-[90rem] relative z-10">
-            {/* Header Area */}
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="mb-20 flex flex-col md:flex-row justify-between items-start md:items-end relative">
-              <div className="max-w-3xl">
-                <div className="flex items-center gap-4 mb-6">
-                  <span className="text-slate-500 font-bold text-xs tracking-[0.2em] uppercase">
-                    ENGINEERING
-                  </span>
+            <div className="mt-24 border-t border-slate-100 pt-16">
+              {/* Header Section */}
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={fadeInUp}
+                className="mb-14"
+              >
+                <div className="flex items-center gap-2 text-primary-gray font-bold text-xs uppercase tracking-widest mb-2">
+                  Lifecycle
                 </div>
+                <h3 className="text-2xl md:text-3xl font-black text-[#0f1b3a] tracking-tight mb-2">
+                  Project workflow
+                </h3>
+                <p className="text-slate-500 font-medium">From site conditions to commissioning</p>
+              </motion.div>
 
-                <h2 className="text-5xl md:text-[4rem] font-black text-slate-800 leading-[1.05] mb-6 tracking-tight">
-                  From process understanding <br className="hidden lg:block" />
-                  to <span className="text-primary-blue">pollution control</span>
-                </h2>
-
-                <p className="text-slate-500 text-lg md:text-xl font-medium">
-                  Show customers that NAPCEN is more than an equipment catalogue.
-                </p>
-              </div>
-            </motion.div>
-
-            {/* Process Flow Grid */}
-            <div className="relative">
-              {/* Top labels */}
-              <div className="hidden lg:grid grid-cols-6 mb-8 text-[9px] font-bold text-slate-400 tracking-[0.2em] uppercase text-center relative z-0">
-                <div className="col-span-2 text-left pl-6">PROCESS</div>
-                <div className="col-span-1 text-primary-blue text-center">ENGINEERING</div>
-                <div className="col-span-1 text-center">FABRICATION</div>
-                <div className="col-span-2 text-right pr-6">INSTALLATION</div>
-              </div>
-
-              {/* Central Connector Line */}
-              <div className="absolute top-[85px] left-0 right-0 h-px bg-blue-100 hidden lg:block z-0"></div>
-
-              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6 relative z-10 pt-6">
+              {/* Pipeline Workflow Grid */}
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={staggerContainer}
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 bg-slate-50/70 p-3 rounded-3xl border border-slate-200/80"
+              >
                 {[
-                  { title: "Understand", desc: "Study the process, pollutant and operating conditions.", icon: FileSearch, isActive: false },
-                  { title: "Select", desc: "Identify the appropriate control technology.", icon: Sliders, isActive: false },
-                  { title: "Engineer", desc: "Develop the equipment and system configuration.", icon: MonitorCog, isActive: true },
-                  { title: "Manufacture", desc: "Build the required equipment and components.", icon: Factory, isActive: false },
-                  { title: "Install", desc: "Support installation and commissioning as applicable.", icon: Wrench, isActive: false },
-                  { title: "Support", desc: "Provide technical and after-sales support.", icon: Headset, isActive: false }
-                ].map((step, i) => {
-                  const Icon = step.icon;
-                  return (
-                    <motion.div key={i} variants={fadeInUp} className="relative h-full">
-                      {/* Connector arrow on the line */}
-                      {i > 0 && <div className="absolute left-[-15px] top-[30px] w-2 h-2 border-t-2 border-r-2 border-blue-200 rotate-45 hidden lg:block z-20 bg-white shadow-[2px_-2px_0_white]"></div>}
-
-                      <div className={`
-                        bg-white rounded-2xl p-6 h-full flex flex-col items-center text-center transition-all duration-500 relative
-                        ${step.isActive ? 'border-2 border-primary-blue shadow-[0_10px_40px_rgba(0,102,255,0.15)] lg:scale-[1.08] z-20' : 'border border-slate-100 hover:border-blue-200 shadow-sm hover:shadow-md z-10'}
-                      `}>
-                        {/* Number Badge */}
-                        <div className={`
-                          absolute -top-5 left-1/2 -translate-x-1/2 w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold shadow-sm border-4 border-[#f8fbff]
-                          ${step.isActive ? 'bg-primary-blue text-white' : 'bg-slate-50 text-primary-blue'}
-                        `}>
-                          0{i + 1}
+                  {
+                    step: "01",
+                    title: "Define",
+                    desc: "Review process data, emission source, inlet and target outlet conditions.",
+                  },
+                  {
+                    step: "02",
+                    title: "Engineer",
+                    desc: "Select capture, treatment, materials, fan and control philosophy for the application.",
+                  },
+                  {
+                    step: "03",
+                    title: "Manufacture",
+                    desc: "Fabricate the agreed equipment and document the project-specific scope.",
+                  },
+                  {
+                    step: "04",
+                    title: "Support",
+                    desc: "Coordinate installation and commissioning support where included in the contract.",
+                  },
+                ].map((item, i) => (
+                  <motion.div
+                    key={i}
+                    variants={fadeInUp}
+                    className="group relative bg-white rounded-2xl p-6 transition-all duration-300 hover:shadow-lg hover:shadow-slate-200/60 border border-transparent hover:border-primary-blue/20 flex flex-col justify-between"
+                  >
+                    <div>
+                      {/* Top Row: Circular Node & Step Code */}
+                      <div className="flex items-center justify-between pb-6 mb-6 border-b border-slate-100">
+                        <div className="w-10 h-10 rounded-xl bg-slate-100/80 text-[#0f1b3a] font-black text-sm flex items-center justify-center group-hover:bg-[#0f1b3a] group-hover:text-white transition-all duration-300">
+                          {item.step}
                         </div>
 
-                        <div className={`
-                          w-14 h-14 rounded-full flex items-center justify-center mb-6 mt-4
-                          ${step.isActive ? 'text-primary-blue' : 'text-primary-blue/60'}
-                        `}>
-                          <Icon size={32} strokeWidth={1.5} />
-                        </div>
-
-                        <h3 className={`text-[15px] font-bold mb-3 ${step.isActive ? 'text-[#0f1b3a]' : 'text-slate-800'}`}>
-                          {step.title}
-                        </h3>
-
-                        <p className={`text-[12px] leading-relaxed ${step.isActive ? 'text-slate-600' : 'text-slate-500'}`}>
-                          {step.desc}
-                        </p>
+                        <span className="text-[11px] font-bold tracking-widest text-slate-400 group-hover:text-primary-blue transition-colors uppercase">
+                          Phase {item.step}
+                        </span>
                       </div>
-                    </motion.div>
-                  );
-                })}
+
+                      {/* Title */}
+                      <h4 className="text-lg font-black text-[#0f1b3a] mb-2.5 flex items-center gap-2">
+                        <span>{item.title}</span>
+                        <span className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-primary-blue text-sm">
+                          →
+                        </span>
+                      </h4>
+
+                      {/* Description */}
+                      <p className="text-xs md:text-sm text-slate-500 leading-relaxed font-medium">
+                        {item.desc}
+                      </p>
+                    </div>
+
+                    {/* Bottom Accent Line */}
+                    <div className="mt-6 pt-4 border-t border-slate-50 flex items-center justify-between">
+                      <div className="h-1 w-full bg-slate-100 rounded-full overflow-hidden">
+                        <div className="h-full bg-primary-blue w-0 group-hover:w-full transition-all duration-500 ease-out" />
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
               </motion.div>
             </div>
-
           </div>
         </section>
 
+        {/* PROCESS SECTION (Removed as requested) */}
 
-        {/* WHY NAPCEN SECTION */}
-        <section className="py-24 bg-white relative overflow-hidden">
-          {/* Subtle background glow */}
-          <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-primary-blue/5 rounded-full blur-[120px] pointer-events-none translate-x-1/3 -translate-y-1/3"></div>
 
-          <div className="container mx-auto px-6 max-w-7xl relative z-10">
-            <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+        {/* WHY NAPCEN SECTION (Removed as requested) */}
 
-              {/* Left Content */}
-              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}>
-                <span className="text-slate-500 font-bold text-xs tracking-[0.2em] uppercase mb-4 block">
-                  Why NAPCEN
-                </span>
-                <h2 className="text-5xl md:text-[4rem] font-black text-slate-800 leading-[1.05] mb-6 tracking-tight">
-                  Built around the application, <br className="hidden md:block" />
-                  not just the equipment.
-                </h2>
+        {/* GLOBAL PROJECTS SECTION */}
+        <section className="relative w-full aspect-[21/9] overflow-hidden bg-[#051124] flex items-center">
+          <Image
+            src="https://res.cloudinary.com/defqgygsf/image/upload/v1790682032/ChatGPT_Image_Sep_29_2026_05_03_18_PM_indw2c.png"
+            alt="Global Projects Background"
+            fill
+            quality={100}
+            priority
+            unoptimized
+            className="object-cover object-right lg:object-center"
+          />
 
-                <div className="bg-slate-50 border border-slate-200 p-5 rounded-2xl mb-10 max-w-md">
-                  <div className="flex gap-3">
-                    <div className="text-primary-blue pt-1">
-                      <Settings size={18} />
-                    </div>
-                    <p className="text-slate-600 text-sm leading-relaxed font-medium">
-                      <strong className="text-slate-800 block mb-1">Pre-launch note:</strong>
-                      Use verified company capabilities, project numbers, and customer evidence here before launch.
-                    </p>
-                  </div>
-                </div>
+          {/* Subtle gradient overlay to ensure text readability on the left */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#051124] via-[#051124]/80 lg:via-[#051124]/60 to-transparent z-0 w-full lg:w-2/3 pointer-events-none" />
 
-                <a href="#contact" className="inline-flex items-center justify-center bg-primary-blue text-white px-8 py-4 rounded-full font-bold text-sm tracking-wider hover:bg-blue-600 shadow-md hover:shadow-lg transition-all uppercase">
-                  Discuss Your Requirement
-                </a>
-              </motion.div>
+          <div className="w-full px-4 md:px-8 lg:px-12 relative z-10">
+            <div className="max-w-3xl mt-12 md:mt-0">
+              <span className="text-gray-400 font-bold text-[11px] sm:text-[13px] tracking-[0.2em] uppercase mb-6 block">
+                INDIA-BASED • INTERNATIONAL ENQUIRIES
+              </span>
+              <h2 className="text-4xl md:text-5xl lg:text-[56px] font-black text-white leading-[1.1] tracking-tight mb-8 drop-shadow-lg">
+                Air pollution control equipment manufacturer and exporter for global projects
+              </h2>
+              <p className="text-slate-300 text-base md:text-lg mb-10 leading-relaxed font-medium drop-shadow-md">
+                From Puducherry, NAPCEN accepts technical enquiries for projects in India, the Middle East, Southeast Asia, Europe and North America. Export documentation, standards, logistics and installation scope should be agreed for each destination.
+              </p>
 
-              {/* Right Features Grid */}
-              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} className="grid sm:grid-cols-2 gap-6 md:gap-8">
-                {[
-                  { title: "Application-focused engineering", icon: Target },
-                  { title: "Customized equipment solutions", icon: Sliders },
-                  { title: "Multiple APC technologies", icon: Layers },
-                  { title: "Industrial project support", icon: Briefcase },
-                  { title: "Manufacturing capability", icon: Factory },
-                  { title: "Technical & after-sales support", icon: LifeBuoy }
-                ].map((item, i) => {
-                  const Icon = item.icon;
-                  return (
-                    <motion.div key={i} variants={fadeInUp} className="flex gap-4 group">
-                      <div className="w-12 h-12 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center text-primary-blue transition-all shrink-0 group-hover:bg-blue-50 group-hover:border-blue-200 group-hover:scale-105">
-                        <Icon size={20} strokeWidth={2.5} />
-                      </div>
-                      <div className="flex-1 pt-2">
-                        <h4 className="text-slate-800 font-bold text-sm leading-snug transition-colors group-hover:text-primary-blue">
-                          {item.title}
-                        </h4>
-                      </div>
-                    </motion.div>
-                  );
-                })}
-              </motion.div>
+              <div className="flex flex-wrap gap-3 items-center mb-10">
+                {['India', 'Middle East', 'Southeast Asia', 'Europe', 'North America'].map(region => (
+                  <span key={region} className="px-6 py-2.5 rounded-full border border-white/30 text-white text-sm font-bold hover:bg-white/10 transition-colors backdrop-blur-md shadow-lg">
+                    {region}
+                  </span>
+                ))}
+              </div>
+
+              <a href="#contact" className="inline-flex items-center gap-2 bg-white hover:bg-slate-100 text-[#0f1b3a] font-black py-3.5 px-8 rounded-xl transition-all shadow-xl text-sm lg:text-[15px]">
+                Share your project specification &rarr;
+              </a>
+            </div>
+          </div>
+
+          {/* Right Bottom Card */}
+          <div className="hidden md:flex absolute bottom-8 right-8 lg:bottom-10 lg:right-12 z-20 max-w-sm lg:max-w-[440px] bg-[#0c1e36]/80 backdrop-blur-xl border border-white/10 p-6 lg:p-7 rounded-3xl items-start gap-5 shadow-2xl">
+            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#0c1e36] to-cyan-900/40 flex items-center justify-center shrink-0 border border-white/10 shadow-inner">
+              <FileBadge className="w-7 h-7 text-white opacity-90" />
+            </div>
+            <div>
+              <h4 className="text-white font-bold text-sm lg:text-[15px] mb-2.5 leading-snug tracking-wide">Design to the applicable requirement</h4>
+              <p className="text-slate-300 text-[11px] lg:text-[12px] leading-[1.6]">
+                For an Indian project, provide the relevant CPCB or State Pollution Control Board consent condition and stack limit. For other markets, supply the authority having jurisdiction, emission specification and any equipment standards in the tender. A product is not automatically "EPA approved", "OSHA compliant" or CE marked by virtue of its category.
+              </p>
             </div>
           </div>
         </section>
 
         {/* FAQ SECTION */}
-        <section className="py-24 bg-white relative overflow-hidden">
-          <div className="container mx-auto px-6 max-w-5xl relative z-10">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="mb-12">
-              <span className="text-slate-500 font-bold text-xs tracking-[0.2em] uppercase mb-4 block">
-                FAQ
-              </span>
-              <h2 className="text-5xl md:text-[4rem] font-black text-slate-800 leading-[1.05] mb-6 tracking-tight">
-                Frequently asked questions
-              </h2>
-            </motion.div>
+        <section id="faq" className="py-24 bg-white relative overflow-hidden">
+          <div className="container mx-auto px-6 max-w-7xl relative z-10">
+            <div className="grid lg:grid-cols-[1fr_1.5fr] gap-12 lg:gap-24 items-start">
 
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} className="max-w-3xl space-y-4">
-              {[
-                {
-                  q: "What information is needed for an APC quotation?",
-                  a: "To provide an accurate quotation, we typically need details about your manufacturing process, the type of pollutant (dust, fume, gas, etc.), airflow volume requirements, operating temperatures, and any space constraints at your facility."
-                },
-                {
-                  q: "Can NAPCEN provide customized pollution-control equipment?",
-                  a: "Yes, we specialize in engineering and manufacturing customized air pollution control systems. We understand that every industrial process is unique, and we tailor our equipment to meet your specific operational requirements and local environmental regulations."
-                },
-                {
-                  q: "Which industries can use air pollution control equipment?",
-                  a: "Our equipment serves a wide range of sectors including metalworking, woodworking, chemical processing, pharmaceuticals, food and beverage, cement, mining, and general manufacturing facilities."
-                },
-                {
-                  q: "I am not sure which equipment I need. What should I do?",
-                  a: "Don't worry. Simply contact our engineering team with a brief description of your process and the problem you're facing. We will arrange a technical consultation to assess your needs and recommend the most effective and efficient solution."
-                }
-              ].map((faq, i) => {
-                const isOpen = openFaqIndex === i;
-                return (
-                  <motion.div key={i} variants={fadeInUp} className={`overflow-hidden transition-all duration-300 ${isOpen ? 'bg-white shadow-lg rounded-2xl px-6 lg:px-8 border border-slate-100' : 'bg-transparent border-b border-slate-200 hover:bg-slate-100/50 rounded-2xl px-6 lg:px-8'}`}>
-                    <button
-                      onClick={() => setOpenFaqIndex(isOpen ? null : i)}
-                      className="w-full flex items-center justify-between py-6 lg:py-7 text-left focus:outline-none group"
-                    >
-                      <h3 className={`text-lg font-bold transition-colors ${isOpen ? 'text-primary-blue' : 'text-slate-800 group-hover:text-primary-blue'}`}>
-                        {faq.q}
-                      </h3>
-                      <div className={`shrink-0 ml-6 flex items-center justify-center w-10 h-10 rounded-full transition-colors ${isOpen ? 'bg-blue-50 text-primary-blue' : 'text-slate-400 group-hover:bg-slate-200 group-hover:text-slate-600'}`}>
-                        <motion.div animate={{ rotate: isOpen ? 90 : 0 }} transition={{ duration: 0.2 }}>
-                          <ChevronRight className="w-5 h-5 font-black stroke-[3]" />
-                        </motion.div>
-                      </div>
-                    </button>
-                    <AnimatePresence>
-                      {isOpen && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.3, ease: "easeInOut" }}
-                        >
-                          <div className="pb-8 pr-4 lg:pr-16 text-slate-500 text-[15px] font-medium leading-relaxed">
-                            {faq.a}
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </motion.div>
-                );
-              })}
-            </motion.div>
+              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="sticky top-32">
+                <span className="text-slate-500 font-bold text-[11px] tracking-[0.2em] uppercase block mb-4">
+                  QUESTIONS FROM INDUSTRIAL BUYERS
+                </span>
+                <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-[#0f1b3a] leading-[1.05] tracking-tight mb-6">
+                  Air pollution control<br />equipment FAQs
+                </h2>
+                <p className="text-slate-500 text-lg mb-10 max-w-lg leading-relaxed font-medium">
+                  For a precise answer, share a process description and any emission test or design data in the enquiry form.
+                </p>
+              </motion.div>
+
+              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} className="flex flex-col">
+                {[
+                  {
+                    q: "Which air pollution control equipment should we select?",
+                    a: "Start with pollutant chemistry and phase, concentration, particle size, exhaust volume, temperature and target outlet. Wet scrubbers, dry media systems, dust collectors and fume extraction systems solve different problems; some sites need a combination."
+                  },
+                  {
+                    q: "What data is needed for a wet scrubber quotation?",
+                    a: "Provide gas flow, contaminant species and inlet concentration, temperature, humidity, target emission, available water and reagent, preferred materials and any site layout drawing. The engineer can advise which unknowns need testing."
+                  },
+                  {
+                    q: "Do you provide custom dust collectors and fume extractors?",
+                    a: "NAPCEN's range includes industrial dust and fume control equipment. Selection depends on dust loading, capture points, process hazards, duty and pressure drop. Request a technical review for a project-specific configuration."
+                  },
+                  {
+                    q: "Can NAPCEN quote export projects?",
+                    a: "Use the RFQ to give the country, city, delivery requirement and applicable standards. The team can review the supply scope and shipping or site-service requirements for that project."
+                  },
+                  {
+                    q: "Can you guarantee a removal efficiency or emission limit?",
+                    a: "A performance commitment requires an agreed design basis, inlet conditions, pollutant test method, operation and maintenance assumptions, and contract terms. A generic percentage is not a project guarantee."
+                  },
+                  {
+                    q: "How can I submit the enquiry?",
+                    a: "Complete the technical form above, review the generated summary and choose WhatsApp or email. Your messaging app will open with the details; press Send there to deliver the enquiry to NAPCEN."
+                  }
+                ].map((faq, i) => {
+                  const isOpen = openFaqIndex === i;
+                  return (
+                    <motion.div key={i} variants={fadeInUp} className="border-b border-slate-200 last:border-0 overflow-hidden">
+                      <button
+                        onClick={() => setOpenFaqIndex(isOpen ? null : i)}
+                        className="w-full flex items-center justify-between py-6 text-left focus:outline-none group"
+                      >
+                        <h3 className={`text-lg font-bold pr-8 transition-colors duration-300 ${isOpen ? 'text-primary-blue' : 'text-[#0f1b3a] group-hover:text-primary-blue'}`}>
+                          {faq.q}
+                        </h3>
+                        <div className={`relative shrink-0 w-8 h-8 flex items-center justify-center rounded-full border transition-all duration-300 ${isOpen ? 'border-primary-blue bg-primary-blue shadow-md' : 'border-slate-200 bg-slate-50 group-hover:border-primary-blue group-hover:bg-blue-50'}`}>
+                          <div className={`absolute w-3.5 h-[2px] transition-all duration-300 rounded-full ${isOpen ? 'bg-white' : 'bg-slate-600 group-hover:bg-primary-blue'}`}></div>
+                          <div className={`absolute w-[2px] h-3.5 transition-all duration-300 rounded-full ${isOpen ? 'bg-white rotate-90 scale-0' : 'bg-slate-600 group-hover:bg-primary-blue scale-100'}`}></div>
+                        </div>
+                      </button>
+                      <AnimatePresence>
+                        {isOpen && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.3, ease: "easeInOut" }}
+                          >
+                            <div className="pb-8 pr-12 text-slate-500 text-[15px] font-medium leading-relaxed">
+                              {faq.a}
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </motion.div>
+                  );
+                })}
+              </motion.div>
+            </div>
           </div>
         </section>
 
@@ -761,10 +1048,12 @@ export default function NapcenLandingPage() {
           creatorName="NAPCEN Team"
           creatorUrl="#"
           navLinks={[
-            { label: "Solutions", href: "#solutions" },
-            { label: "Products", href: "#products" },
             { label: "Applications", href: "#applications" },
+            { label: "Products", href: "#products" },
+            { label: "Engineering", href: "#engineering" },
             { label: "Industries", href: "#industries" },
+            { label: "FAQ", href: "#faq" },
+            { label: "Enquire", href: "#contact" },
           ]}
           socialLinks={[
             { icon: <Globe className="w-5 h-5" />, href: "#", label: "Website" },
@@ -781,9 +1070,9 @@ export default function NapcenLandingPage() {
                 <span className="text-white font-mono text-[11px] tracking-[0.3em] uppercase mb-6 block">
                   Let's Build Together
                 </span>
-                <h2 className="text-5xl md:text-7xl font-black text-white mb-6 leading-[1.05] tracking-tighter">
-                  Ready for <br />
-                  cleaner air?
+                <h2 className="text-3xl md:text-5xl lg:text-[54px] font-black text-white mb-6 leading-[1.1] tracking-tight">
+                  Need industrial air <br className="hidden md:block" />
+                  pollution control equipment?
                 </h2>
                 <p className="text-slate-400 text-lg mb-12 leading-relaxed">
                   Start a technical discussion with NAPCEN engineers. We analyze your process to provide the most effective pollution control solution.
@@ -847,6 +1136,14 @@ export default function NapcenLandingPage() {
                   </div>
                 </a>
               </motion.div>
+            </div>
+
+            {/* Privacy Disclaimer */}
+            <div className="mt-16 pt-8 border-t border-white/10">
+              <h4 className="text-slate-300 font-bold text-sm mb-2">Enquiry data & privacy</h4>
+              <p className="text-slate-500 text-xs leading-relaxed max-w-4xl">
+                This preview processes form values in your browser to prepare a message. It does not upload or store your form entries on this website. If you choose WhatsApp or email, the information you review is passed to that service when you open it and sent to NAPCEN only when you confirm Send. Contact <a href="mailto:info@napcen.com" className="text-slate-300 hover:text-white underline underline-offset-2 transition-colors">info@napcen.com</a> about handling of enquiries. No advertising conversion tag is installed in this preview.
+              </p>
             </div>
           </div>
         </Footer>
