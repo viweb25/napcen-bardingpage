@@ -104,10 +104,10 @@ export default function NapcenLandingPage() {
           </div>
 
           <div className="container mx-auto px-4 md:px-8 xl:px-12 2xl:px-16 relative z-10">
-            <div className="flex flex-col lg:flex-row gap-8 xl:gap-12 items-center lg:items-stretch min-h-[480px]">
+            <div className="flex flex-col md:flex-row gap-8 xl:gap-12 items-center md:items-stretch min-h-[480px]">
 
               {/* LEFT: TEXT & STATS */}
-              <div className="w-full lg:w-[45%] xl:w-[43%] flex flex-col justify-center">
+              <div className="w-full md:w-[45%] xl:w-[43%] flex flex-col justify-center">
                 <div className="mb-6">
                   <span className="text-slate-500 font-bold text-[10px] sm:text-xs tracking-[0.2em] uppercase">
                     Custom engineered air pollution control systems · India & export projects
@@ -125,7 +125,7 @@ export default function NapcenLandingPage() {
                   NAPCEN manufactures wet scrubbers, dry scrubbers, dust collectors, fume extractors and source-capture systems for industrial dust, fumes, gases and odour. Share your operating conditions to request a technical quotation.
                 </p>
 
-                <div className="flex flex-wrap items-center gap-4 mb-12">
+                <div className="flex flex-wrap items-center gap-4 pb-8 mb-8 border-b border-slate-200 w-fit">
                   <a href="#contact" className="bg-primary-blue  text-white font-bold py-4 px-8 rounded-full transition-all shadow-lg hover:shadow-xl text-sm flex items-center gap-2">
                     Request a technical quote <ArrowRight size={16} className="-rotate-45" />
                   </a>
@@ -134,7 +134,7 @@ export default function NapcenLandingPage() {
                   </a>
                 </div>
 
-                <div className="flex flex-col gap-4 border-t border-slate-200 pt-8 sm:flex-row sm:flex-wrap">
+                <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap">
                   <div className="flex items-center gap-3">
                     <div className="w-5 h-5 rounded-full bg-blue-50 text-primary-blue flex items-center justify-center shrink-0">
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -159,10 +159,9 @@ export default function NapcenLandingPage() {
 
 
               {/* RIGHT: FORM */}
-              <div className="w-full lg:w-[52%] xl:w-[54%] relative z-20 flex flex-col justify-center mt-12 lg:mt-0 lg:-ml-8 xl:-ml-12" id="contact">
+              <div className="w-full md:w-[52%] xl:w-[54%] relative z-20 flex flex-col justify-center mt-12 md:-mt-10 md:-ml-4 lg:-ml-8 xl:-ml-12" id="contact">
                 <div className="bg-white rounded-3xl p-5 sm:p-6 lg:p-8 shadow-[0_20px_60px_rgba(0,0,0,0.08)] border border-slate-100">
                   <div className="flex items-center gap-2 mb-4">
-                    <div className="w-4 h-0.5 bg-primary-blue" />
                     <span className="text-slate-500 font-bold text-xs tracking-[0.2em] uppercase">
                       {formStep === 1 ? "STEP 1 OF 2 · YOUR APPLICATION" : "STEP 2 OF 2 · CONTACT DETAILS"}
                     </span>
@@ -352,7 +351,7 @@ export default function NapcenLandingPage() {
 
 
         {/* SOLUTIONS SECTION */}
-        <section id="solutions" className="py-24 bg-white relative overflow-hidden">
+        <section id="applications" className="py-24 bg-white relative overflow-hidden">
           <div className="w-full px-6 md:px-12 2xl:px-24">
 
             {/* Header Area */}
@@ -420,9 +419,9 @@ export default function NapcenLandingPage() {
             </motion.div>
 
             {/* Bottom Footer for Solutions Section */}
-            <div className="mt-16 ml-70 pt-8 border-t border-slate-200 flex flex-col lg:flex-row justify-between items-center gap-8">
+            <div className="mt-16 pt-8 border-t border-slate-200 flex flex-col lg:flex-row justify-center items-center gap-8">
 
-              <div className="flex flex-wrap md:flex-nowrap gap-6 md:gap-12 w-full lg:w-auto justify-between">
+              <div className="flex flex-wrap md:flex-nowrap gap-6 md:gap-12 w-full justify-center">
                 {[
                   { title: "Improved Air Quality", subtitle: "Healthier People", icon: Shield },
                   { title: "Compliant Operations", subtitle: "Meet Emission Standards", icon: Settings },
@@ -431,11 +430,11 @@ export default function NapcenLandingPage() {
                 ].map((feature, i) => {
                   const FIcon = feature.icon;
                   return (
-                    <div key={i} className="flex items-center gap-3">
-                      <div className="text-primary-blue"><FIcon size={24} strokeWidth={1.5} /></div>
+                    <div key={i} className="flex items-center gap-4">
+                      <div className="text-primary-blue"><FIcon size={28} strokeWidth={1.5} /></div>
                       <div className="flex flex-col">
-                        <span className="text-xs font-bold text-slate-700">{feature.title}</span>
-                        <span className="text-[10px] text-slate-400 font-medium uppercase tracking-wider">{feature.subtitle}</span>
+                        <span className="text-sm font-bold text-slate-700">{feature.title}</span>
+                        <span className="text-xs text-slate-400 font-medium uppercase tracking-wider">{feature.subtitle}</span>
                       </div>
                     </div>
                   );
