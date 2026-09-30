@@ -107,7 +107,7 @@ export default function NapcenLandingPage() {
             <div className="flex flex-col md:flex-row gap-8 xl:gap-12 items-center md:items-stretch min-h-[480px]">
 
               {/* LEFT: TEXT & STATS */}
-              <div className="w-full md:w-[45%] xl:w-[43%] flex flex-col justify-center">
+              <div className="w-full md:w-[45%] xl:w-[43%] flex flex-col justify-start pt-5 sm:pt-6 lg:pt-8">
                 <div className="mb-6">
                   <span className="text-slate-500 font-bold text-[10px] sm:text-xs tracking-[0.2em] uppercase">
                     Custom engineered air pollution control systems · India & export projects
@@ -159,7 +159,7 @@ export default function NapcenLandingPage() {
 
 
               {/* RIGHT: FORM */}
-              <div className="w-full md:w-[52%] xl:w-[54%] relative z-20 flex flex-col justify-center mt-12 md:-mt-10 md:-ml-4 lg:-ml-8 xl:-ml-12" id="contact">
+              <div className="w-full md:w-[52%] xl:w-[54%] relative z-20 flex flex-col justify-start mt-12 md:mt-0 md:-ml-4 lg:-ml-8 xl:-ml-12" id="contact">
                 <div className="bg-white rounded-3xl p-5 sm:p-6 lg:p-8 shadow-[0_20px_60px_rgba(0,0,0,0.08)] border border-slate-100">
                   <div className="flex items-center gap-2 mb-4">
                     <span className="text-slate-500 font-bold text-xs tracking-[0.2em] uppercase">
@@ -531,20 +531,7 @@ export default function NapcenLandingPage() {
                 <p className="text-slate-500 text-lg mb-10 max-w-lg leading-relaxed font-medium">
                   Compare the primary treatment methods, then send the equipment name into your RFQ with one click. Final design and compliance targets are confirmed against your data.
                 </p>
-                <div className="flex flex-wrap gap-2 md:gap-3 items-center">
-                  {["All equipment", "Scrubbers", "Dust collection", "Fume & source capture", "System components"].map(filter => (
-                    <button
-                      key={filter}
-                      onClick={() => setProductFilter(filter)}
-                      className={`px-4 py-2 rounded-full text-[13px] font-bold transition-all border
-                        ${productFilter === filter
-                          ? 'bg-[#0f1b3a] text-white border-[#0f1b3a]'
-                          : 'bg-white text-slate-600 border-slate-200 hover:border-slate-400 hover:text-slate-800'}`}
-                    >
-                      {filter}
-                    </button>
-                  ))}
-                </div>
+
               </motion.div>
 
               <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="flex justify-center md:justify-end items-center gap-4 md:gap-8 mt-8 md:mt-0">
