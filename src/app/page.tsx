@@ -104,10 +104,10 @@ export default function NapcenLandingPage() {
           </div>
 
           <div className="container mx-auto px-4 md:px-8 xl:px-12 2xl:px-16 relative z-10">
-            <div className="flex flex-col lg:flex-row gap-8 xl:gap-12 items-center lg:items-stretch min-h-[600px]">
+            <div className="flex flex-col lg:flex-row gap-8 xl:gap-12 items-center lg:items-stretch min-h-[480px]">
 
               {/* LEFT: TEXT & STATS */}
-              <div className="w-full lg:w-[45%] xl:w-[45%] flex flex-col justify-center">
+              <div className="w-full lg:w-[45%] xl:w-[43%] flex flex-col justify-center">
                 <div className="mb-6">
                   <span className="text-slate-500 font-bold text-[10px] sm:text-xs tracking-[0.2em] uppercase">
                     Custom engineered air pollution control systems · India & export projects
@@ -156,32 +156,27 @@ export default function NapcenLandingPage() {
                 </div>
               </div>
 
-              {/* CENTER: IMAGE */}
-              <div className="w-full lg:w-[25%] xl:w-[30%] relative hidden lg:flex items-center justify-center">
-                {/* <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[160%] max-w-[600px] z-10 pointer-events-none">
-                  <Image src="https://res.cloudinary.com/defqgygsf/image/upload/v1790179841/0296_rfuykp.png" alt="Industrial Scrubber Equipment" width={600} height={800} className="w-full h-auto object-contain mix-blend-multiply drop-shadow-2xl" />
-                </div> */}
-              </div>
+
 
               {/* RIGHT: FORM */}
-              <div className="w-full lg:w-[50%] xl:w-[52%] relative z-20 flex flex-col justify-center mt-12 lg:mt-0 lg:-ml-8 xl:-ml-16" id="contact">
-                <div className="bg-white rounded-3xl p-8 sm:p-12 lg:p-14 shadow-[0_20px_60px_rgba(0,0,0,0.08)] border border-slate-100">
-                  <div className="flex items-center gap-2 mb-6">
+              <div className="w-full lg:w-[52%] xl:w-[54%] relative z-20 flex flex-col justify-center mt-12 lg:mt-0 lg:-ml-8 xl:-ml-12" id="contact">
+                <div className="bg-white rounded-3xl p-5 sm:p-6 lg:p-8 shadow-[0_20px_60px_rgba(0,0,0,0.08)] border border-slate-100">
+                  <div className="flex items-center gap-2 mb-4">
                     <div className="w-4 h-0.5 bg-primary-blue" />
                     <span className="text-slate-500 font-bold text-xs tracking-[0.2em] uppercase">
                       {formStep === 1 ? "STEP 1 OF 2 · YOUR APPLICATION" : "STEP 2 OF 2 · CONTACT DETAILS"}
                     </span>
                   </div>
 
-                  <h3 className="text-3xl lg:text-4xl font-black text-[#0f1b3a] mb-4">Request an engineered quotation</h3>
-                  <p className="text-[15px] text-slate-500 mb-8 font-medium leading-relaxed">Tell us what your process generates. Approximate values are welcome.</p>
+                  <h3 className="text-2xl lg:text-3xl font-black text-[#0f1b3a] mb-3">Request an engineered quotation</h3>
+                  <p className="text-[14px] text-slate-500 mb-6 font-medium leading-relaxed">Tell us what your process generates. Approximate values are welcome.</p>
 
                   {formStep === 1 ? (
-                    <form onSubmit={(e) => { e.preventDefault(); setFormStep(2); }} className="space-y-5">
+                    <form onSubmit={(e) => { e.preventDefault(); setFormStep(2); }} className="space-y-3">
                       <div className="grid grid-cols-2 gap-4 xl:gap-5">
                         <div className="flex flex-col gap-2">
                           <label className="text-[13px] font-bold text-[#0f1b3a]">Equipment required *</label>
-                          <select required value={formData.equipment} onChange={(e) => setFormData({ ...formData, equipment: e.target.value })} className="w-full bg-white border border-slate-300 rounded-lg px-4 py-3.5 text-sm focus:outline-none focus:border-primary-blue focus:ring-1 focus:ring-primary-blue text-slate-700 transition-all font-medium shadow-sm">
+                          <select required value={formData.equipment} onChange={(e) => setFormData({ ...formData, equipment: e.target.value })} className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-primary-blue focus:ring-1 focus:ring-primary-blue text-slate-700 transition-all font-medium shadow-sm">
                             <option value="">Select equipment</option>
                             <option>Wet Scrubber</option>
                             <option>Dry Scrubber</option>
@@ -196,7 +191,7 @@ export default function NapcenLandingPage() {
                         </div>
                         <div className="flex flex-col gap-2">
                           <label className="text-[13px] font-bold text-[#0f1b3a]">Pollutant / application *</label>
-                          <select required value={formData.application} onChange={(e) => setFormData({ ...formData, application: e.target.value })} className="w-full bg-white border border-slate-300 rounded-lg px-4 py-3.5 text-sm focus:outline-none focus:border-primary-blue focus:ring-1 focus:ring-primary-blue text-slate-700 transition-all font-medium shadow-sm">
+                          <select required value={formData.application} onChange={(e) => setFormData({ ...formData, application: e.target.value })} className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-primary-blue focus:ring-1 focus:ring-primary-blue text-slate-700 transition-all font-medium shadow-sm">
                             <option value="">Select pollutant</option>
                             <option>Acid gas / chemical fumes</option>
                             <option>Dust / particulate</option>
@@ -211,11 +206,11 @@ export default function NapcenLandingPage() {
                       <div className="grid grid-cols-2 gap-4 xl:gap-5">
                         <div className="flex flex-col gap-2">
                           <label className="text-[13px] font-bold text-[#0f1b3a]">Airflow estimate</label>
-                          <input placeholder="e.g. 5,000" value={formData.airflow} onChange={(e) => setFormData({ ...formData, airflow: e.target.value })} className="w-full bg-white border border-slate-300 rounded-lg px-4 py-3.5 text-sm focus:outline-none focus:border-primary-blue focus:ring-1 focus:ring-primary-blue text-slate-700 transition-all font-medium shadow-sm" />
+                          <input placeholder="e.g. 5,000" value={formData.airflow} onChange={(e) => setFormData({ ...formData, airflow: e.target.value })} className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-primary-blue focus:ring-1 focus:ring-primary-blue text-slate-700 transition-all font-medium shadow-sm" />
                         </div>
                         <div className="flex flex-col gap-2">
                           <label className="text-[13px] font-bold text-[#0f1b3a]">Unit</label>
-                          <select value={formData.unit} onChange={(e) => setFormData({ ...formData, unit: e.target.value })} className="w-full bg-white border border-slate-300 rounded-lg px-4 py-3.5 text-sm focus:outline-none focus:border-primary-blue focus:ring-1 focus:ring-primary-blue text-slate-700 transition-all font-medium shadow-sm">
+                          <select value={formData.unit} onChange={(e) => setFormData({ ...formData, unit: e.target.value })} className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-primary-blue focus:ring-1 focus:ring-primary-blue text-slate-700 transition-all font-medium shadow-sm">
                             <option value="">CMH (m³/h)</option>
                             <option>CFM</option>
                           </select>
@@ -225,11 +220,11 @@ export default function NapcenLandingPage() {
                       <div className="grid grid-cols-2 gap-4 xl:gap-5">
                         <div className="flex flex-col gap-2">
                           <label className="text-[13px] font-bold text-[#0f1b3a]">Operating temperature (°C)</label>
-                          <input placeholder="If known" value={formData.temp} onChange={(e) => setFormData({ ...formData, temp: e.target.value })} className="w-full bg-white border border-slate-300 rounded-lg px-4 py-3.5 text-sm focus:outline-none focus:border-primary-blue focus:ring-1 focus:ring-primary-blue text-slate-700 transition-all font-medium shadow-sm" />
+                          <input placeholder="If known" value={formData.temp} onChange={(e) => setFormData({ ...formData, temp: e.target.value })} className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-primary-blue focus:ring-1 focus:ring-primary-blue text-slate-700 transition-all font-medium shadow-sm" />
                         </div>
                         <div className="flex flex-col gap-2">
                           <label className="text-[13px] font-bold text-[#0f1b3a]">Project timeline</label>
-                          <select value={formData.timeline} onChange={(e) => setFormData({ ...formData, timeline: e.target.value })} className="w-full bg-white border border-slate-300 rounded-lg px-4 py-3.5 text-sm focus:outline-none focus:border-primary-blue focus:ring-1 focus:ring-primary-blue text-slate-700 transition-all font-medium shadow-sm">
+                          <select value={formData.timeline} onChange={(e) => setFormData({ ...formData, timeline: e.target.value })} className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-primary-blue focus:ring-1 focus:ring-primary-blue text-slate-700 transition-all font-medium shadow-sm">
                             <option value="">Planning stage</option>
                             <option>Within 1 month</option>
                             <option>1–3 months</option>
@@ -241,11 +236,11 @@ export default function NapcenLandingPage() {
 
                       <div className="flex flex-col gap-2">
                         <label className="text-[13px] font-bold text-[#0f1b3a]">Process details</label>
-                        <textarea placeholder="Source/process, inlet concentration, target emission, available drawing or site constraints" value={formData.desc} onChange={(e) => setFormData({ ...formData, desc: e.target.value })} className="w-full bg-white border border-slate-300 rounded-lg px-4 py-3.5 text-sm focus:outline-none focus:border-primary-blue focus:ring-1 focus:ring-primary-blue transition-all min-h-[100px] resize-y font-medium text-slate-700 shadow-sm" />
+                        <textarea placeholder="Source/process, inlet concentration, target emission, available drawing or site constraints" value={formData.desc} onChange={(e) => setFormData({ ...formData, desc: e.target.value })} className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-primary-blue focus:ring-1 focus:ring-primary-blue transition-all min-h-[80px] resize-y font-medium text-slate-700 shadow-sm" />
                       </div>
 
-                      <div className="pt-4">
-                        <button type="submit" className="w-full bg-[#0a5cbb]  text-white font-black py-4 rounded-xl transition-all shadow-md text-sm lg:text-[15px] flex items-center justify-center gap-2 tracking-wide">
+                      <div className="flex justify-end pt-4">
+                        <button type="submit" className="w-full sm:w-auto px-8 sm:px-10 bg-[#0a5cbb] text-white font-black py-4 rounded-xl transition-all shadow-md text-sm lg:text-[15px] flex items-center justify-center gap-2 tracking-wide">
                           CONTINUE TO CONTACT DETAILS <ArrowRight size={18} />
                         </button>
                       </div>
@@ -255,43 +250,43 @@ export default function NapcenLandingPage() {
                       </p>
                     </form>
                   ) : (
-                    <form onSubmit={handleDemoSubmit} className="space-y-5">
+                    <form onSubmit={handleDemoSubmit} className="space-y-3">
                       <div className="grid grid-cols-2 gap-4 xl:gap-5">
                         <div className="flex flex-col gap-2">
                           <label className="text-[13px] font-bold text-[#0f1b3a]">Full name *</label>
-                          <input required value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className="w-full bg-white border border-slate-300 rounded-lg px-4 py-3.5 text-sm focus:outline-none focus:border-primary-blue focus:ring-1 focus:ring-primary-blue text-slate-700 transition-all font-medium shadow-sm" />
+                          <input required value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-primary-blue focus:ring-1 focus:ring-primary-blue text-slate-700 transition-all font-medium shadow-sm" />
                         </div>
                         <div className="flex flex-col gap-2">
                           <label className="text-[13px] font-bold text-[#0f1b3a]">Company name *</label>
-                          <input required value={formData.company} onChange={(e) => setFormData({ ...formData, company: e.target.value })} className="w-full bg-white border border-slate-300 rounded-lg px-4 py-3.5 text-sm focus:outline-none focus:border-primary-blue focus:ring-1 focus:ring-primary-blue text-slate-700 transition-all font-medium shadow-sm" />
+                          <input required value={formData.company} onChange={(e) => setFormData({ ...formData, company: e.target.value })} className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-primary-blue focus:ring-1 focus:ring-primary-blue text-slate-700 transition-all font-medium shadow-sm" />
                         </div>
                       </div>
 
                       <div className="grid grid-cols-2 gap-4 xl:gap-5">
                         <div className="flex flex-col gap-2">
                           <label className="text-[13px] font-bold text-[#0f1b3a]">Work email *</label>
-                          <input type="email" required value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} className="w-full bg-white border border-slate-300 rounded-lg px-4 py-3.5 text-sm focus:outline-none focus:border-primary-blue focus:ring-1 focus:ring-primary-blue text-slate-700 transition-all font-medium shadow-sm" />
+                          <input type="email" required value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-primary-blue focus:ring-1 focus:ring-primary-blue text-slate-700 transition-all font-medium shadow-sm" />
                         </div>
                         <div className="flex flex-col gap-2">
                           <label className="text-[13px] font-bold text-[#0f1b3a]">Phone / WhatsApp *</label>
-                          <input type="tel" required value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} className="w-full bg-white border border-slate-300 rounded-lg px-4 py-3.5 text-sm focus:outline-none focus:border-primary-blue focus:ring-1 focus:ring-primary-blue text-slate-700 transition-all font-medium shadow-sm" />
+                          <input type="tel" required value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-primary-blue focus:ring-1 focus:ring-primary-blue text-slate-700 transition-all font-medium shadow-sm" />
                         </div>
                       </div>
 
                       <div className="grid grid-cols-2 gap-4 xl:gap-5">
                         <div className="flex flex-col gap-2">
                           <label className="text-[13px] font-bold text-[#0f1b3a]">Country *</label>
-                          <input placeholder="e.g. India" required value={formData.country} onChange={(e) => setFormData({ ...formData, country: e.target.value })} className="w-full bg-white border border-slate-300 rounded-lg px-4 py-3.5 text-sm focus:outline-none focus:border-primary-blue focus:ring-1 focus:ring-primary-blue text-slate-700 transition-all font-medium shadow-sm" />
+                          <input placeholder="e.g. India" required value={formData.country} onChange={(e) => setFormData({ ...formData, country: e.target.value })} className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-primary-blue focus:ring-1 focus:ring-primary-blue text-slate-700 transition-all font-medium shadow-sm" />
                         </div>
                         <div className="flex flex-col gap-2">
                           <label className="text-[13px] font-bold text-[#0f1b3a]">City / project location *</label>
-                          <input required value={formData.location} onChange={(e) => setFormData({ ...formData, location: e.target.value })} className="w-full bg-white border border-slate-300 rounded-lg px-4 py-3.5 text-sm focus:outline-none focus:border-primary-blue focus:ring-1 focus:ring-primary-blue text-slate-700 transition-all font-medium shadow-sm" />
+                          <input required value={formData.location} onChange={(e) => setFormData({ ...formData, location: e.target.value })} className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-primary-blue focus:ring-1 focus:ring-primary-blue text-slate-700 transition-all font-medium shadow-sm" />
                         </div>
                       </div>
 
                       <div className="flex flex-col gap-2">
                         <label className="text-[13px] font-bold text-[#0f1b3a]">Industry</label>
-                        <select value={formData.industry} onChange={(e) => setFormData({ ...formData, industry: e.target.value })} className="w-full bg-white border border-slate-300 rounded-lg px-4 py-3.5 text-sm focus:outline-none focus:border-primary-blue focus:ring-1 focus:ring-primary-blue text-slate-700 transition-all font-medium shadow-sm">
+                        <select value={formData.industry} onChange={(e) => setFormData({ ...formData, industry: e.target.value })} className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-primary-blue focus:ring-1 focus:ring-primary-blue text-slate-700 transition-all font-medium shadow-sm">
                           <option>Chemical & petrochemical</option>
                           <option>Pharmaceutical</option>
                           <option>Metal & engineering</option>
@@ -425,7 +420,7 @@ export default function NapcenLandingPage() {
             </motion.div>
 
             {/* Bottom Footer for Solutions Section */}
-            <div className="mt-16 pt-8 border-t border-slate-200 flex flex-col lg:flex-row justify-between items-center gap-8">
+            <div className="mt-16 ml-70 pt-8 border-t border-slate-200 flex flex-col lg:flex-row justify-between items-center gap-8">
 
               <div className="flex flex-wrap md:flex-nowrap gap-6 md:gap-12 w-full lg:w-auto justify-between">
                 {[
@@ -520,40 +515,6 @@ export default function NapcenLandingPage() {
           </div>
         </section>
 
-        {/* APPLICATIONS SECTION */}
-        <section id="applications" className="py-24 bg-white relative overflow-hidden">
-          <div className="container mx-auto px-6 max-w-7xl relative z-10">
-
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="mb-12">
-              <span className="text-slate-500 font-bold text-[11px] tracking-[0.2em] uppercase block mb-4">
-                APPLICATIONS
-              </span>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-[#0f1b3a] leading-[1.05] tracking-tight mb-6">
-                Solutions by industrial application
-              </h2>
-              <p className="text-slate-500 text-lg mb-10 max-w-lg leading-relaxed font-medium">
-                Build search visibility around real customer problems and process requirements.
-              </p>
-            </motion.div>
-
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[
-                { title: "Welding Fume Extraction", desc: "Source capture for welding and fabrication operations." },
-                { title: "Grinding & Buffing Dust", desc: "Dust capture for grinding, polishing and finishing operations." },
-                { title: "Laser & Plasma Fumes", desc: "Extraction for cutting and thermal processing applications." },
-                { title: "CNC / Oil Mist", desc: "Oil mist and process-aerosol collection for machining operations." },
-                { title: "Chemical Fume Control", desc: "Application-specific treatment for suitable chemical-process exhaust." },
-                { title: "Process Exhaust Treatment", desc: "Extraction and treatment systems for industrial exhaust streams." }
-              ].map((app, i) => (
-                <motion.div key={i} variants={fadeInUp} className="bg-white rounded-2xl p-8 shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
-                  <h3 className="text-xl font-bold text-[#0f1b3a] mb-3">{app.title}</h3>
-                  <p className="text-slate-500 text-sm leading-relaxed">{app.desc}</p>
-                </motion.div>
-              ))}
-            </motion.div>
-
-          </div>
-        </section>
 
         {/* PRODUCTS SECTION */}
         <section id="products" className="py-24 bg-white relative overflow-hidden">
@@ -717,7 +678,7 @@ export default function NapcenLandingPage() {
                     <motion.div key={i} variants={fadeInUp} className="relative p-6 lg:p-7 rounded-3xl bg-white border border-slate-200 shadow-sm hover:shadow-xl transition-all group overflow-hidden min-h-[420px] flex flex-col">
                       {/* Top row: Number and Icon */}
                       <div className="flex justify-between items-start mb-6 relative z-10">
-                        <div className="text-8xl md:text-9xl font-black text-slate-200 group-hover:text-primary-blue/20 transition-colors tracking-tighter">0{i + 1}</div>
+                        {/* <div className="text-8xl md:text-9xl font-black text-slate-200 group-hover:text-primary-blue/20 transition-colors tracking-tighter">0{i + 1}</div> */}
                         <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${isHighlight ? 'bg-primary-blue/10 text-primary-blue' : 'bg-slate-50 text-slate-400'} group-hover:bg-primary-blue group-hover:text-white transition-colors`}>
                           <Icon size={24} />
                         </div>
