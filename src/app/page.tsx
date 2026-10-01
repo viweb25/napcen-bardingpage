@@ -35,10 +35,31 @@ export default function NapcenLandingPage() {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
   const [formStep, setFormStep] = useState(1);
   const [productFilter, setProductFilter] = useState("All equipment");
-
-  const handleDemoSubmit = (e: React.FormEvent) => {
+  const handleDemoSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert("This is a design prototype. Connect the form to NAPCEN's email/CRM/WhatsApp workflow before publishing.");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (res.ok) {
+        alert("Thank you! Your inquiry has been successfully submitted.");
+        setFormData({
+          name: "", company: "", email: "", phone: "", industry: "", application: "", equipment: "", desc: "",
+          country: "", location: "", airflow: "", unit: "", temp: "", timeline: ""
+        });
+        setFormStep(1);
+      } else {
+        alert("Sorry, something went wrong. Please try again.");
+      }
+    } catch (error) {
+      alert("Sorry, something went wrong. Please try again.");
+    }
   };
 
   return (
@@ -65,7 +86,8 @@ export default function NapcenLandingPage() {
 
           <div className="flex items-center gap-4 divide-x divide-white/10">
             <a href="mailto:info@napcen.com" className="flex items-center gap-1.5 font-medium hover:text-white transition-colors tracking-wide">
-              <Mail size={13} className="text-blue-500" /> info@napcen.com
+              <Mail size={13} className="text-blue-500" />
+              info@napcen.com
             </a>
 
             <a href="tel:+917904469219" className="flex items-center gap-1.5 pl-4 text-white font-bold hover:text-emerald-400 transition-colors tracking-wide">
@@ -314,7 +336,7 @@ export default function NapcenLandingPage() {
                     </form>
                   )}
 
-                  <div className="flex justify-between items-center mt-6 pt-4 border-t border-slate-100 text-[10px] text-slate-500 font-medium">
+                  <div className="flex justify-center items-center gap-6 md:gap-10 mt-6 pt-4 border-t border-slate-100 text-[10px] text-slate-500 font-medium">
                     <div className="flex items-center gap-1.5"><Shield size={12} className="text-[#0f1b3a]" /> Quick Response</div>
                     <div className="flex items-center gap-1.5"><Users size={12} className="text-[#0f1b3a]" /> Expert Support</div>
                     <div className="flex items-center gap-1.5"><Settings size={12} className="text-[#0f1b3a]" /> Custom Solutions</div>
@@ -904,7 +926,8 @@ export default function NapcenLandingPage() {
         {/* WHY NAPCEN SECTION (Removed as requested) */}
 
         {/* GLOBAL PROJECTS SECTION */}
-        <section className="relative w-full aspect-[21/9] overflow-hidden bg-[#051124] flex items-center">
+        <section className="relative w-full py-24 md:py-0 md:aspect-[21/9] overflow-hidden bg-[#051124] flex items-center">
+          {/* Desktop Background */}
           <Image
             src="https://res.cloudinary.com/defqgygsf/image/upload/v1790682032/ChatGPT_Image_Sep_29_2026_05_03_18_PM_indw2c.png"
             alt="Global Projects Background"
@@ -912,7 +935,17 @@ export default function NapcenLandingPage() {
             quality={100}
             priority
             unoptimized
-            className="object-cover object-right lg:object-center"
+            className="object-cover object-right lg:object-center hidden md:block"
+          />
+          {/* Mobile Background */}
+          <Image
+            src="/INDUSTRIAL/India-Centered%20Industrial%20Network%20at%20Night.png"
+            alt="Global Projects Mobile Background"
+            fill
+            quality={100}
+            priority
+            unoptimized
+            className="object-cover object-center md:hidden"
           />
 
           {/* Subtle gradient overlay to ensure text readability on the left */}
@@ -1098,8 +1131,7 @@ export default function NapcenLandingPage() {
                       </div>
                       <div>
                         <div className="text-[10px] text-slate-400 uppercase tracking-widest mb-1 font-bold">GENERAL SUPPORT</div>
-                        <a href="mailto:info@napcen.com" className="text-white text-[15px] font-bold tracking-wide hover:text-cyan-400 transition-colors block">
-                          info@napcen.com
+                        <a href="mailto:info@napcen.com" className="text-white text-[15px] font-bold tracking-wide hover:text-cyan-400 transition-colors block"> info@napcen.com
                         </a>
                       </div>
                     </div>
