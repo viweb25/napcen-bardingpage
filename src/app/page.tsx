@@ -814,7 +814,7 @@ export default function NapcenLandingPage() {
                       title: "Define",
                       desc: "Understand process, emission source and site conditions.",
                       color: "text-blue-600", bg: "bg-blue-600", borderColor: "border-blue-600",
-                      image: "/INDUSTRIAL/Engineers Inspecting a Modern Chemical Plant"
+                      image: "/INDUSTRIAL/Engineers Inspecting a Modern Chemical Plant.png"
                     },
                     {
                       step: "02",
