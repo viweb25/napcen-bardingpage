@@ -6,6 +6,7 @@ import { motion, Variants, AnimatePresence } from "framer-motion";
 import { Droplet, Wind, Grip, Fan, Table, Beaker, RefreshCcw, Share2, Leaf, Shield, Settings, BarChart3, Phone, Mail, MapPin, ChevronRight, Target, Sliders, Layers, Briefcase, Factory, LifeBuoy, Globe, Users, FileText, Send, Cloud, FlaskConical, Pill, Car, PaintRoller, Utensils, Cpu, Scissors, Gem, FileSearch, MonitorCog, Wrench, Headset, Building2, Anchor, FileBadge, ArrowRight, Plane } from "lucide-react";
 import { Footer } from "@/components/ui/modem-animated-footer";
 import ThreeBackground from "@/components/napcen-landing/ThreeBackground";
+import LogoTicker from "@/components/napcen-landing/LogoTicker";
 
 // --- ANIMATION VARIANTS ---
 const fadeInUp: Variants = {
@@ -349,6 +350,7 @@ export default function NapcenLandingPage() {
           </div>
         </section>
 
+        <LogoTicker />
 
         {/* SOLUTIONS SECTION */}
         <section id="applications" className="py-24 bg-white relative overflow-hidden">
@@ -603,7 +605,7 @@ export default function NapcenLandingPage() {
                   extraText: "Particle properties, airflow, pressure drop and cleaning method.",
                   btnText: "Enquire about dust control →",
                   icon: Fan,
-                  image: "https://res.cloudinary.com/defqgygsf/image/upload/v1790691907/3_ohg7nm.png",
+                  image: "https://res.cloudinary.com/defqgygsf/image/upload/v1790784408/Cartridge_cyclone_dust_collectors_image_g8cnl9.png",
                   equipmentSelect: "Dust Collector",
                   filterTag: "Dust collection"
                 },
@@ -615,7 +617,7 @@ export default function NapcenLandingPage() {
                   extraText: "Station count, capture distance, process and operating hours.",
                   btnText: "Enquire about fume systems →",
                   icon: Table,
-                  image: "https://res.cloudinary.com/defqgygsf/image/upload/v1790691907/2_ghh1qy.png",
+                  image: "https://res.cloudinary.com/defqgygsf/image/upload/v1790784407/Industrial_welding_laser_and_solder_fume_extractors_image_qmmfla.png",
                   equipmentSelect: "Fume Extractor",
                   filterTag: "Fume & source capture"
                 },
@@ -627,7 +629,7 @@ export default function NapcenLandingPage() {
                   extraText: "Workpiece size, task, dust type and operator arrangement.",
                   btnText: "Enquire about tables →",
                   icon: Beaker,
-                  image: "https://res.cloudinary.com/defqgygsf/image/upload/v1790691907/1_vbu2zw.png",
+                  image: "https://res.cloudinary.com/defqgygsf/image/upload/v1790691907/2_ghh1qy.png",
                   equipmentSelect: "Downdraft Table",
                   filterTag: "Fume & source capture"
                 },
@@ -639,7 +641,7 @@ export default function NapcenLandingPage() {
                   extraText: "Opening dimensions, source rate, fluid type and duct routing.",
                   btnText: "Enquire about enclosures →",
                   icon: Fan,
-                  image: "https://res.cloudinary.com/defqgygsf/image/upload/v1790175867/napcen7-removebg-preview_tqczhg.png",
+                  image: "https://res.cloudinary.com/defqgygsf/image/upload/v1790691907/1_vbu2zw.png",
                   equipmentSelect: "Fume Hood",
                   filterTag: "Fume & source capture"
                 },
@@ -651,7 +653,7 @@ export default function NapcenLandingPage() {
                   extraText: "Route length, fittings, static pressure and installation scope.",
                   btnText: "Enquire about full systems →",
                   icon: RefreshCcw,
-                  image: "https://res.cloudinary.com/defqgygsf/image/upload/v1790175868/napcen8-removebg-preview_fvhqxs.png",
+                  image: "https://res.cloudinary.com/defqgygsf/image/upload/v1790175867/napcen7-removebg-preview_tqczhg.png",
                   equipmentSelect: "Complete Air Pollution Control System",
                   filterTag: "System components"
                 }
@@ -740,36 +742,61 @@ export default function NapcenLandingPage() {
 
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
-                { title: "Chemical & pharmaceutical", desc: "Acid fume scrubbers, reactor vent treatment, powder dust collectors and corrosion-resistant process exhaust systems." },
-                { title: "Metal fabrication & automotive", desc: "Welding fume extraction, grinding downdraft tables, CNC oil mist collection and general process ventilation." },
-                { title: "Water, wastewater & biogas", desc: "H₂S treatment, STP odour control and suitable dry or wet scrubbing after composition and safety review." },
-                { title: "Food & bulk materials", desc: "Dust capture at transfer and handling points, with material, hygiene and combustible dust considerations." },
-                { title: "Electronics manufacturing", desc: "Local solder fume capture and centralized extraction concepts for multi-station production areas." },
-                { title: "Boiler & thermal processes", desc: "Flue-gas treatment concepts based on particulate, acid gas, temperature and emission constraints." }
-              ].map((ind, i) => (
-                <motion.div key={i} variants={fadeInUp} className="bg-white rounded-2xl p-8 border border-slate-200 hover:border-slate-300 hover:shadow-md transition-all group">
-                  <h3 className="text-lg font-bold text-[#0f1b3a] mb-3">{ind.title}</h3>
-                  <p className="text-sm text-slate-500 leading-relaxed font-medium">{ind.desc}</p>
-                </motion.div>
-              ))}
+                { title: "Chemical Processing & Petrochemicals", desc: "Industrial air pollution control systems capture acid gases, VOCs, chemical fumes, HCl, SO₂, H₂S and hazardous emissions from chemical processing, refineries and petrochemical plants.", image: "/INDUSTRIAL/Sunset%20Petrochemical%20Refinery%20Panorama.png" },
+                { title: "Metals, Fabrication & Automotive", desc: "Wet scrubbers, dust collectors and fume extraction systems control welding fumes, grinding dust, metal particulates, smoke and process emissions from fabrication, foundries and automotive manufacturing.", image: "/INDUSTRIAL/Steelworks%20to%20Smart%20Automotive%20Assembly.png" },
+                { title: "Water, Wastewater Treatment & Biogas", desc: "Odor control and gas treatment systems remove H₂S, ammonia, VOCs and corrosive gases from STP, ETP, wastewater treatment, sewage handling and biogas facilities.", image: "/INDUSTRIAL/Renewable%20Waters_%20Biogas%20Treatment%20Plant%20at%20Sunset.png" },
+                { title: "Cement, Mining & Aggregates", desc: "Industrial dust collection systems capture high-volume particulate matter generated during crushing, grinding, screening, conveying, material transfer and cement manufacturing operations.", image: "/INDUSTRIAL/Sunlit%20Aggregate%20Plant%20and%20Quarry.png" },
+                { title: "Pharmaceuticals & Fine Chemicals", desc: "Wet scrubbers and dust collection systems control chemical vapors, solvent fumes, acid gases, API dust and fine particulates from pharmaceutical and specialty chemical manufacturing processes.", image: "/INDUSTRIAL/Futuristic%20Pharmaceutical%20Research%20and%20Production%20Facility.png" },
+                { title: "Power Generation, Boilers & Thermal Processes", desc: "Flue gas treatment and wet scrubber systems reduce SOx, acid gases, particulate matter, fly ash and combustion emissions from industrial boilers, furnaces, incinerators and thermal processes.", image: "/INDUSTRIAL/Industrial%20Power%20Plant%20at%20Sunset.png" },
+                { title: "Food Processing & Agriculture", desc: "Dust and odor control systems manage organic dust, powder particulates, fumes and process odors generated in food manufacturing, grain handling, feed processing and agricultural operations.", image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=600&q=80" },
+                { title: "Paints, Coatings & Printing", desc: "VOC control, fume extraction and air pollution control systems capture solvent vapors, paint fumes, odors and airborne contaminants from coating, painting and industrial printing processes.", image: "/INDUSTRIAL/Vibrant%20Paint%20and%20Printing%20Factory.png" },
+                { title: "Electronics & Semiconductor Manufacturing", desc: "Advanced wet scrubber and exhaust treatment systems control acid fumes, corrosive gases, chemical vapors and hazardous process emissions from electronics and semiconductor manufacturing.", image: "/INDUSTRIAL/High-Tech%20Semiconductor%20Cleanroom%20Montage.png" }
+              ].map((ind, i) => {
+                const isBlue = i % 2 === 0;
+                return (
+                  <motion.div key={i} variants={fadeInUp} className="relative bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl border border-slate-100 transition-all duration-300 min-h-[300px] group flex">
+                    {/* Background Image */}
+                    <div className="absolute inset-0 right-0 w-full h-full z-0">
+                      <Image src={ind.image} fill className="object-cover object-right group-hover:scale-105 transition-transform duration-700" alt={ind.title} />
+                    </div>
+
+                    {/* White Curved Overlay */}
+                    <div className="absolute inset-0 w-[68%] h-full z-10 pointer-events-none">
+                      <svg className="w-full h-full drop-shadow-[4px_0_8px_rgba(0,0,0,0.06)]" preserveAspectRatio="none" viewBox="0 0 100 100">
+                        <path d="M0,0 L75,0 C75,35 100,55 100,100 L0,100 Z" fill="white" />
+                      </svg>
+                    </div>
+
+                    {/* Content */}
+                    <div className="relative z-20 w-[55%] p-5 md:p-7 flex flex-col justify-start">
+
+                      <h3 className="text-[16px] md:text-lg font-black text-[#0f1b3a] mb-3 leading-snug">{ind.title}</h3>
+                      <p className="text-[11px] md:text-[12px] text-slate-500 leading-relaxed font-medium">{ind.desc}</p>
+                    </div>
+                  </motion.div>
+                );
+              })}
             </motion.div>
 
-            <div className="mt-24 border-t border-slate-100 pt-16">
+            <div className="mt-24 border-t border-slate-100 pt-16 w-full max-w-full overflow-hidden">
               {/* Header Section */}
               <motion.div
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
                 variants={fadeInUp}
-                className="mb-14"
+                className="mb-16 text-center max-w-3xl mx-auto flex flex-col items-center"
               >
-                <div className="flex items-center gap-2 text-primary-gray font-bold text-xs uppercase tracking-widest mb-2">
+                <div className="flex items-center justify-center gap-2 text-primary-gray font-bold text-xs uppercase tracking-widest mb-3">
                   Lifecycle
                 </div>
-                <h3 className="text-2xl md:text-3xl font-black text-[#0f1b3a] tracking-tight mb-2">
+                <h3 className="text-3xl md:text-4xl lg:text-5xl font-black text-[#0f1b3a] tracking-tight mb-4">
                   Project workflow
                 </h3>
-                <p className="text-slate-500 font-medium">From site conditions to commissioning</p>
+                <p className="text-slate-500 font-medium text-sm md:text-base">
+                  From process data to commissioning and after-sales support
+                </p>
+
               </motion.div>
 
               {/* Pipeline Workflow Grid */}
@@ -777,70 +804,95 @@ export default function NapcenLandingPage() {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
-                variants={staggerContainer}
-                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 bg-slate-50/70 p-3 rounded-3xl border border-slate-200/80"
+                variants={fadeInUp}
+                className="w-full"
               >
-                {[
-                  {
-                    step: "01",
-                    title: "Define",
-                    desc: "Review process data, emission source, inlet and target outlet conditions.",
-                  },
-                  {
-                    step: "02",
-                    title: "Engineer",
-                    desc: "Select capture, treatment, materials, fan and control philosophy for the application.",
-                  },
-                  {
-                    step: "03",
-                    title: "Manufacture",
-                    desc: "Fabricate the agreed equipment and document the project-specific scope.",
-                  },
-                  {
-                    step: "04",
-                    title: "Support",
-                    desc: "Coordinate installation and commissioning support where included in the contract.",
-                  },
-                ].map((item, i) => (
-                  <motion.div
-                    key={i}
-                    variants={fadeInUp}
-                    className="group relative bg-white rounded-2xl p-6 transition-all duration-300 hover:shadow-lg hover:shadow-slate-200/60 border border-transparent hover:border-primary-blue/20 flex flex-col justify-between"
-                  >
-                    <div>
-                      {/* Top Row: Circular Node & Step Code */}
-                      <div className="flex items-center justify-between pb-6 mb-6 border-b border-slate-100">
-                        <div className="w-10 h-10 rounded-xl bg-slate-100/80 text-[#0f1b3a] font-black text-sm flex items-center justify-center group-hover:bg-[#0f1b3a] group-hover:text-white transition-all duration-300">
-                          {item.step}
+                <div className="flex overflow-x-auto lg:overflow-visible pb-12 hide-scrollbar lg:justify-between items-start gap-4 lg:gap-0 snap-x snap-mandatory">
+                  {[
+                    {
+                      step: "01",
+                      title: "Define",
+                      desc: "Understand process, emission source and site conditions.",
+                      color: "text-blue-600", bg: "bg-blue-600", borderColor: "border-blue-600",
+                      image: "/INDUSTRIAL/Engineers Inspecting a Modern Chemical Plant"
+                    },
+                    {
+                      step: "02",
+                      title: "Engineer",
+                      desc: "Select technology, size equipment and design the system.",
+                      color: "text-sky-500", bg: "bg-sky-500", borderColor: "border-sky-500",
+                      image: "/INDUSTRIAL/Industrial%20Process%20Design%20Workstation.png"
+                    },
+                    {
+                      step: "03",
+                      title: "Detail Design",
+                      desc: "Prepare PFD, P&ID, GA drawings and equipment specifications.",
+                      color: "text-teal-400", bg: "bg-teal-400", borderColor: "border-teal-400",
+                      image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=300&q=80"
+                    },
+                    {
+                      step: "04",
+                      title: "Procure",
+                      desc: "Procure raw materials and key components.",
+                      color: "text-green-500", bg: "bg-green-500", borderColor: "border-green-500",
+                      image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=300&q=80"
+                    },
+                    {
+                      step: "05",
+                      title: "Manufacture",
+                      desc: "Fabricate equipment as per approved drawings.",
+                      color: "text-yellow-500", bg: "bg-yellow-500", borderColor: "border-yellow-500",
+                      image: "/INDUSTRIAL/Steelworks%20to%20Smart%20Automotive%20Assembly.png"
+                    },
+                    {
+                      step: "06",
+                      title: "Inspect & Test",
+                      desc: "Perform dimensional inspection, testing and quality checks.",
+                      color: "text-orange-500", bg: "bg-orange-500", borderColor: "border-orange-500",
+                      image: "/INDUSTRIAL/Precision Inspection of a Stainless Vessel.png"
+                    },
+                    {
+                      step: "07",
+                      title: "Dispatch & Install",
+                      desc: "Pack, dispatch and coordinate site installation (where in scope).",
+                      color: "text-red-500", bg: "bg-red-500", borderColor: "border-red-500",
+                      image: "/INDUSTRIAL/Industrial%20Dispatch%20and%20Crane%20Installation.png"
+                    },
+                    {
+                      step: "08",
+                      title: "Commission & Support",
+                      desc: "Start-up, performance verification and after-sales support.",
+                      color: "text-purple-600", bg: "bg-purple-600", borderColor: "border-purple-600",
+                      image: "/INDUSTRIAL/Industrial%20Process%20Commissioning%20Team.png"
+                    },
+                  ].map((item, i, arr) => (
+                    <React.Fragment key={i}>
+                      <div className="flex flex-col items-center text-center relative group w-[220px] lg:w-[11%] shrink-0 snap-center">
+                        <div className="relative mb-5 inline-block">
+                          <div className={`w-28 h-28 lg:w-32 lg:h-32 rounded-full border-[3px] p-1 lg:p-1.5 transition-colors duration-300 bg-white ${item.borderColor}`}>
+                            <div className="w-full h-full rounded-full overflow-hidden relative bg-slate-100">
+                              <Image src={item.image} alt={item.title} fill sizes="(max-width: 1024px) 112px, 128px" className="object-cover group-hover:scale-110 transition-transform duration-500" />
+                            </div>
+                          </div>
+
+                          <div className={`absolute -top-1 -left-1 w-8 h-8 lg:w-9 lg:h-9 rounded-full flex items-center justify-center text-white font-bold text-[13px] lg:text-sm border-2 border-white shadow-sm z-10 ${item.bg}`}>
+                            {item.step}
+                          </div>
                         </div>
 
-                        <span className="text-[11px] font-bold tracking-widest text-slate-400 group-hover:text-primary-blue transition-colors uppercase">
-                          Phase {item.step}
-                        </span>
+                        <h4 className="text-[15px] lg:text-[16px] font-black text-[#0f1b3a] mb-2 leading-tight px-1">{item.title}</h4>
+                        <p className="text-[11px] lg:text-[12px] text-slate-500 leading-relaxed font-medium px-1">{item.desc}</p>
                       </div>
 
-                      {/* Title */}
-                      <h4 className="text-lg font-black text-[#0f1b3a] mb-2.5 flex items-center gap-2">
-                        <span>{item.title}</span>
-                        <span className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-primary-blue text-sm">
-                          →
-                        </span>
-                      </h4>
-
-                      {/* Description */}
-                      <p className="text-xs md:text-sm text-slate-500 leading-relaxed font-medium">
-                        {item.desc}
-                      </p>
-                    </div>
-
-                    {/* Bottom Accent Line */}
-                    <div className="mt-6 pt-4 border-t border-slate-50 flex items-center justify-between">
-                      <div className="h-1 w-full bg-slate-100 rounded-full overflow-hidden">
-                        <div className="h-full bg-primary-blue w-0 group-hover:w-full transition-all duration-500 ease-out" />
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
+                      {i < arr.length - 1 && (
+                        <div className="hidden lg:flex flex-1 items-center justify-center relative min-w-[10px]" style={{ height: '128px' }}>
+                          <div className={`h-[2px] w-full ${arr[i + 1].bg}`}></div>
+                          <div className={`absolute right-0 w-0 h-0 border-y-[5px] border-y-transparent border-l-[6px] border-l-current ${arr[i + 1].color}`} style={{ right: '-3px' }}></div>
+                        </div>
+                      )}
+                    </React.Fragment>
+                  ))}
+                </div>
               </motion.div>
             </div>
           </div>
