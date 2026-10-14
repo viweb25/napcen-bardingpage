@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, Variants, AnimatePresence } from "framer-motion";
-import { Droplet, Wind, Grip, Fan, Table, Beaker, RefreshCcw, Share2, Leaf, Shield, Settings, BarChart3, Phone, Mail, MapPin, ChevronRight, Target, Sliders, Layers, Briefcase, Factory, LifeBuoy, Globe, Users, FileText, Send, Cloud, FlaskConical, Pill, Car, PaintRoller, Utensils, Cpu, Scissors, Gem, FileSearch, MonitorCog, Wrench, Headset, Building2, Anchor, FileBadge, ArrowRight, Plane } from "lucide-react";
+import { Droplet, Wind, Grip, Fan, Table, Beaker, RefreshCcw, Share2, Leaf, Shield, Settings, BarChart3, Phone, Mail, MapPin, ChevronRight, Target, Sliders, Layers, Briefcase, Factory, LifeBuoy, Globe, Users, FileText, Send, Cloud, FlaskConical, Pill, Car, PaintRoller, Utensils, Cpu, Scissors, Gem, FileSearch, MonitorCog, Wrench, Headset, Building2, Anchor, FileBadge, ArrowRight, Plane, Loader2 } from "lucide-react";
 import { Footer } from "@/components/ui/modem-animated-footer";
 import ThreeBackground from "@/components/napcen-landing/ThreeBackground";
 import LogoTicker from "@/components/napcen-landing/LogoTicker";
@@ -45,31 +45,81 @@ export default function NapcenLandingPage() {
   });
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
   const [formStep, setFormStep] = useState(1);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [productFilter, setProductFilter] = useState("All equipment");
+
   const handleDemoSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    if (!formData.name || !formData.email || !formData.phone) {
+      alert("Please enter your name, email, and phone number.");
+      return;
+    }
+
+    setIsSubmitting(true);
+
     try {
-      const res = await fetch("/api/contact", {
+      const ACCESS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
+      if (!ACCESS_KEY) {
+        alert("Web3Forms access key is not configured. Please add NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY to your .env file.");
+        setIsSubmitting(false);
+        return;
+      }
+
+      const extraDetails = [
+        formData.company ? `Company: ${formData.company}` : '',
+        formData.industry ? `Industry: ${formData.industry}` : '',
+        formData.airflow ? `Airflow: ${formData.airflow} ${formData.unit || 'CMH'}` : '',
+        formData.temp ? `Operating Temp: ${formData.temp}` : '',
+        formData.timeline ? `Timeline: ${formData.timeline}` : '',
+        formData.location || formData.country ? `Location: ${[formData.location, formData.country].filter(Boolean).join(', ')}` : '',
+      ].filter(Boolean).join('\n');
+
+      const fullMessage = [
+        formData.desc ? `Requirements: ${formData.desc}` : '',
+        extraDetails ? `\n--- Technical Specifications ---\n${extraDetails}` : ''
+      ].filter(Boolean).join('\n');
+
+      const payload = {
+        access_key: ACCESS_KEY,
+        subject: `New RFQ Quote Request: ${formData.equipment || formData.application || 'Air Pollution Control'} — NAPCEN`,
+        from_name: formData.name || "NAPCEN Lead",
+        name: formData.name,
+        company: formData.company,
+        email: formData.email,
+        phone: formData.phone,
+        application: formData.application,
+        equipment: formData.equipment,
+        message: fullMessage || "Industrial Quote Request from NAPCEN Website",
+      };
+
+      const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Accept: "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(payload),
       });
 
-      if (res.ok) {
-        alert("Thank you! Your inquiry has been successfully submitted.");
+      const result = await res.json();
+
+      if (result.success) {
+        alert("Thank you! Your inquiry has been successfully submitted to NAPCEN.");
         setFormData({
           name: "", company: "", email: "", phone: "", industry: "", application: "", equipment: "", desc: "",
           country: "", location: "", airflow: "", unit: "", temp: "", timeline: ""
         });
         setFormStep(1);
       } else {
-        alert("Sorry, something went wrong. Please try again.");
+        console.error("Web3Forms Response Error:", result);
+        alert(result.message || "Sorry, something went wrong. Please try again or call us at +91 79044 69219.");
       }
     } catch (error) {
-      alert("Sorry, something went wrong. Please try again.");
+      console.error("Submission error:", error);
+      alert("Submission error. Please check your connection or contact us directly at +91 79044 69219.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -339,8 +389,20 @@ export default function NapcenLandingPage() {
                         <button type="button" onClick={(e) => { e.preventDefault(); setFormStep(1); }} className="px-6 sm:px-8 bg-white border border-slate-200 hover:border-slate-300 hover:bg-slate-50 text-[#0f1b3a] font-black py-4 rounded-xl transition-all shadow-sm text-sm flex items-center justify-center shrink-0">
                           ← Back
                         </button>
-                        <button type="submit" className="px-8 sm:px-12 bg-[#0a5cbb] text-white font-black py-4 rounded-xl transition-all shadow-md text-sm lg:text-[15px] flex items-center justify-center gap-2 tracking-wide shrink-0">
-                          SUBMIT ENQUIRY <ArrowRight size={18} />
+                        <button
+                          type="submit"
+                          disabled={isSubmitting}
+                          className="px-8 sm:px-12 bg-[#0a5cbb] hover:bg-[#084893] text-white font-black py-4 rounded-xl transition-all shadow-md text-sm lg:text-[15px] flex items-center justify-center gap-2 tracking-wide shrink-0 disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer"
+                        >
+                          {isSubmitting ? (
+                            <>
+                              <Loader2 size={18} className="animate-spin" /> SUBMITTING...
+                            </>
+                          ) : (
+                            <>
+                              SUBMIT ENQUIRY <ArrowRight size={18} />
+                            </>
+                          )}
                         </button>
                       </div>
 

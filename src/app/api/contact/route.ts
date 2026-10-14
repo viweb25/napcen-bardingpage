@@ -3,7 +3,11 @@ import { NextResponse } from 'next/server';
 export async function POST(req: Request) {
   try {
     const data = await req.json();
-    const ACCESS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || "233963d2-f4b0-4f25-9a2f-bf7e151ac018";
+    const ACCESS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
+
+    if (!ACCESS_KEY) {
+      return NextResponse.json({ error: 'Web3Forms access key is not configured' }, { status: 500 });
+    }
 
     // Build comprehensive message with all technical RFQ details if present
     const extraDetails = [
