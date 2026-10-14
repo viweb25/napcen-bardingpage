@@ -2,11 +2,22 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion, Variants, AnimatePresence } from "framer-motion";
 import { Droplet, Wind, Grip, Fan, Table, Beaker, RefreshCcw, Share2, Leaf, Shield, Settings, BarChart3, Phone, Mail, MapPin, ChevronRight, Target, Sliders, Layers, Briefcase, Factory, LifeBuoy, Globe, Users, FileText, Send, Cloud, FlaskConical, Pill, Car, PaintRoller, Utensils, Cpu, Scissors, Gem, FileSearch, MonitorCog, Wrench, Headset, Building2, Anchor, FileBadge, ArrowRight, Plane } from "lucide-react";
 import { Footer } from "@/components/ui/modem-animated-footer";
 import ThreeBackground from "@/components/napcen-landing/ThreeBackground";
 import LogoTicker from "@/components/napcen-landing/LogoTicker";
+import CurvedMenu from "@/components/ui/curved-menu";
+
+const mobileNavItems = [
+  { heading: "Applications", href: "#applications", subheading: "Pollution Control Systems" },
+  { heading: "Products", href: "#products", subheading: "Scrubbers & Collectors" },
+  { heading: "Engineering", href: "#engineering", subheading: "Technical Capabilities" },
+  { heading: "Industries", href: "#industries", subheading: "Sectors We Serve" },
+  { heading: "FAQ", href: "#faq", subheading: "Common Questions" },
+  { heading: "Enquire", href: "#contact", subheading: "Get Technical Quote" },
+];
 
 // --- ANIMATION VARIANTS ---
 const fadeInUp: Variants = {
@@ -113,6 +124,9 @@ export default function NapcenLandingPage() {
             <a href="#faq" className="hover:text-primary-blue transition-colors">FAQ</a>
             <a href="#contact" className="hover:text-primary-blue transition-colors">Enquire</a>
           </nav>
+
+          {/* Mobile Curved Menu */}
+          <CurvedMenu navItems={mobileNavItems} mobileOnly={true} />
         </div>
       </header>
 
@@ -1160,12 +1174,12 @@ export default function NapcenLandingPage() {
                 <p className="text-slate-400 mb-10 font-medium leading-relaxed relative z-10">
                   Provide your process specifications, and our engineers will evaluate the requirements for a customized solution.
                 </p>
-                <a href="mailto:info@napcen.com" className="relative z-10 flex w-full justify-between items-center bg-white hover:bg-slate-200 text-black font-black py-4 px-8 rounded-full transition-all text-sm tracking-widest uppercase group-hover:shadow-[0_0_30px_rgba(255,255,255,0.1)]">
+                <Link href="/contact" className="relative z-10 flex w-full justify-between items-center bg-white hover:bg-slate-200 text-black font-black py-4 px-8 rounded-full transition-all text-sm tracking-widest uppercase group-hover:shadow-[0_0_30px_rgba(255,255,255,0.1)]">
                   <span>Get my quotation</span>
                   <div className="w-8 h-8 rounded-full bg-black flex items-center justify-center group-hover:scale-110 transition-transform">
                     <ChevronRight className="w-4 h-4 text-white" />
                   </div>
-                </a>
+                </Link>
               </motion.div>
             </div>
 
