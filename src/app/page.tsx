@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, Variants, AnimatePresence } from "framer-motion";
-import { Droplet, Wind, Grip, Fan, Table, Beaker, RefreshCcw, Share2, Leaf, Shield, Settings, BarChart3, Phone, Mail, MapPin, ChevronRight, Target, Sliders, Layers, Briefcase, Factory, LifeBuoy, Globe, Users, FileText, Send, Cloud, FlaskConical, Pill, Car, PaintRoller, Utensils, Cpu, Scissors, Gem, FileSearch, MonitorCog, Wrench, Headset, Building2, Anchor, FileBadge, ArrowRight, Plane, Loader2 } from "lucide-react";
+import { Droplet, Wind, Grip, Fan, Table, Beaker, RefreshCcw, Share2, Leaf, Shield, Settings, BarChart3, Phone, Mail, MapPin, ChevronRight, Target, Sliders, Layers, Briefcase, Factory, LifeBuoy, Globe, Users, FileText, Send, Cloud, FlaskConical, Pill, Car, PaintRoller, Utensils, Cpu, Scissors, Gem, FileSearch, MonitorCog, Wrench, Headset, Building2, Anchor, FileBadge, ArrowRight, ArrowUpRight, Plane, Loader2 } from "lucide-react";
 import { Footer } from "@/components/ui/modem-animated-footer";
 import ThreeBackground from "@/components/napcen-landing/ThreeBackground";
 import LogoTicker from "@/components/napcen-landing/LogoTicker";
@@ -669,7 +669,8 @@ export default function NapcenLandingPage() {
                   icon: Droplet,
                   image: "https://res.cloudinary.com/defqgygsf/image/upload/v1790175868/napcen1-removebg-preview_vwj9wi.png",
                   equipmentSelect: "Wet Scrubber",
-                  filterTag: "Scrubbers"
+                  filterTag: "Scrubbers",
+                  detailsLink: "https://wetscrubber.napcen.com/"
                 },
                 {
                   category: "ODOUR & GAS ADSORPTION",
@@ -681,7 +682,8 @@ export default function NapcenLandingPage() {
                   icon: Wind,
                   image: "https://res.cloudinary.com/defqgygsf/image/upload/v1790691907/5_epgwrw.png",
                   equipmentSelect: "Dry Scrubber",
-                  filterTag: "Scrubbers"
+                  filterTag: "Scrubbers",
+                  detailsLink: "https://dryscrubber.napcen.com/"
                 },
                 {
                   category: "PROCESS DUST",
@@ -693,7 +695,8 @@ export default function NapcenLandingPage() {
                   icon: Grip,
                   image: "https://res.cloudinary.com/defqgygsf/image/upload/v1790691907/4_wigjre.png",
                   equipmentSelect: "Dust Collector",
-                  filterTag: "Dust collection"
+                  filterTag: "Dust collection",
+                  detailsLink: "https://dustcollector.napcen.com/"
                 },
                 {
                   category: "COMPACT FILTRATION",
@@ -705,7 +708,8 @@ export default function NapcenLandingPage() {
                   icon: Fan,
                   image: "https://res.cloudinary.com/defqgygsf/image/upload/v1790784408/Cartridge_cyclone_dust_collectors_image_g8cnl9.png",
                   equipmentSelect: "Dust Collector",
-                  filterTag: "Dust collection"
+                  filterTag: "Dust collection",
+                  detailsLink: "https://dustcollector.napcen.com/"
                 },
                 {
                   category: "CAPTURE AT SOURCE",
@@ -717,7 +721,8 @@ export default function NapcenLandingPage() {
                   icon: Table,
                   image: "https://res.cloudinary.com/defqgygsf/image/upload/v1790784407/Industrial_welding_laser_and_solder_fume_extractors_image_qmmfla.png",
                   equipmentSelect: "Fume Extractor",
-                  filterTag: "Fume & source capture"
+                  filterTag: "Fume & source capture",
+                  detailsLink: "https://fumeextractor.napcen.com/"
                 },
                 {
                   category: "WORKSTATION CONTROL",
@@ -729,7 +734,8 @@ export default function NapcenLandingPage() {
                   icon: Beaker,
                   image: "https://res.cloudinary.com/defqgygsf/image/upload/v1790691907/2_ghh1qy.png",
                   equipmentSelect: "Downdraft Table",
-                  filterTag: "Fume & source capture"
+                  filterTag: "Fume & source capture",
+                  detailsLink: "https://downdrafttable.napcen.com/"
                 },
                 {
                   category: "ENCLOSED EXTRACTION",
@@ -741,7 +747,8 @@ export default function NapcenLandingPage() {
                   icon: Fan,
                   image: "https://res.cloudinary.com/defqgygsf/image/upload/v1790691907/1_vbu2zw.png",
                   equipmentSelect: "Fume Hood",
-                  filterTag: "Fume & source capture"
+                  filterTag: "Fume & source capture",
+                  detailsLink: "#contact"
                 },
                 {
                   category: "COMPLETE APC SYSTEM",
@@ -753,7 +760,8 @@ export default function NapcenLandingPage() {
                   icon: RefreshCcw,
                   image: "https://res.cloudinary.com/defqgygsf/image/upload/v1790175867/napcen7-removebg-preview_tqczhg.png",
                   equipmentSelect: "Complete Air Pollution Control System",
-                  filterTag: "System components"
+                  filterTag: "System components",
+                  detailsLink: "#contact"
                 }
               ]
                 .filter(item => productFilter === "All equipment" || item.filterTag === productFilter)
@@ -783,16 +791,37 @@ export default function NapcenLandingPage() {
                           <span className="text-sm text-slate-500 ml-2">{item.extraText}</span>
                         </div>
 
-                        <div className="mt-auto flex justify-start relative z-30">
+                        <div className="mt-auto flex flex-wrap items-center gap-2 pt-2 relative z-30">
+                          {item.detailsLink?.startsWith("http") ? (
+                            <a
+                              href={item.detailsLink}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wide transition-all bg-primary-blue text-white shadow-sm hover:shadow"
+                            >
+                              <span>More Details</span>
+                              <ArrowUpRight size={13} />
+                            </a>
+                          ) : (
+                            <Link
+                              href={item.detailsLink || "/contact"}
+                              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wide transition-all bg-primary-blue text-white shadow-sm hover:shadow"
+                            >
+                              <span>More Details</span>
+                              <ArrowRight size={13} />
+                            </Link>
+                          )}
+
                           <button
                             onClick={(e) => {
                               e.preventDefault();
                               setFormData({ ...formData, equipment: item.equipmentSelect || "" });
                               document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
                             }}
-                            className={`inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-[10px] font-bold tracking-wider transition-all
-                          ${isHighlight ? 'bg-primary-blue text-white shadow-lg shadow-blue-500/30 hover:bg-blue-600' : 'border border-slate-200 text-slate-700 hover:border-primary-blue hover:text-primary-blue bg-white/80 backdrop-blur-sm'}`}>
-                            {item.btnText}
+                            className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-[11px] font-bold tracking-wider transition-all border border-slate-200 text-slate-700 hover:border-primary-blue hover:text-primary-blue bg-white/80 backdrop-blur-sm cursor-pointer"
+                          >
+                            <span>Enquire</span>
+                            <ArrowRight size={11} />
                           </button>
                         </div>
                       </div>
